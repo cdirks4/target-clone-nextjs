@@ -30,5 +30,5 @@ main()
 	})
 	.finally(async () => {
 		console.log('finally');
-		// await prisma.$disconnect();
+		await prisma.$disconnect();
 	});
