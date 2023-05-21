@@ -15,13 +15,14 @@ module.exports = {
 		},
 
 		borderWidth: {
-			2: '2px',
+			xs: '1px',
 		},
 		borderColor: {
 			'gray-500': '#718096',
 		},
 		borderStyle: {
 			dotted: 'dotted',
+			dashed: 'dashed',
 		},
 	},
 	variants: {},

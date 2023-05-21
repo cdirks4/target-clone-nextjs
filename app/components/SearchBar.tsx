@@ -16,11 +16,11 @@ const SearchBar: FC = () => {
     const [isSidebarOpen, setSidebarOpen] = useState<Boolean>(false);
 
     return (
-        <div className="relative bg-white w-full h-16 flex items-center justify-around">
+        <div className="relative bg-white w-full h-16 flex items-center justify-around shadow-lg">
             <a
                 title="Target Corporation, Public domain, via Wikimedia Commons"
                 href="/"
-                className="w-10 h-10 flex items-center justify-center hover:border-2  hover:border-dotted hover:border-gray-500 "
+                className="w-10 h-10 flex items-center justify-center hover:border-xs  hover:border-dashed hover:border-gray-500 "
             >
                 <img
                     width="32"

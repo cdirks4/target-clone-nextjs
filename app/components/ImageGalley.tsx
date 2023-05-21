@@ -40,7 +40,9 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                         <React.Fragment key={`fragment-${index}`}>
                             <div
                                 key={`bottom-images-div-${index}`}
-                                className="h-full w-full"
+                                className={`h-full w-full  ${
+                                    image === mainImage && 'border-xs'
+                                }`}
                                 onClick={() => handleClick(image)}
                             >
                                 <Image
