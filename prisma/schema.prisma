@@ -17,15 +17,19 @@ model User {
 }
 
 model Product {
-  id           String   @id @default(uuid()) @db.Uuid
-  title        String
-  brand        String
-  rating       Float
-  ratingsTotal Int      @map("ratings_total")
-  images       String[]
-  videos       String[]
-  description  String[]
-  highlights   String[]
+  id             String   @id @default(uuid()) @db.Uuid
+  title          String
+  brand          String
+  price          Float
+  rating         Float
+  ratingsTotal   Int      @map("ratings_total")
+  images         String[]
+  videos         String[]
+  description    String[]
+  highlights     String[]
+  isInStock      Boolean  @map("is_in_stock")
+  storeCity      String   @map("store_city")
+  readyInMinutes Int      @map("ready_in_minutes")
 
   @@map("product")
 }

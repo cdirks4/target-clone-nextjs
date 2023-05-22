@@ -3,6 +3,8 @@ const prisma = new PrismaClient();
 const data = require('./seed.json');
 async function main() {
 	const { product } = data;
+	console.log(product.buybox_winner)
+
 	const productData = {
 		title: product.title,
 		brand: product.brand,
@@ -12,6 +14,10 @@ async function main() {
 		videos: product.videos.map((video) => video.link),
 		description: [product.description],
 		highlights: product.feature_bullets,
+		price: product.buybox_winner.price.value ,
+		isInStock: product.buybox_winner.availability.in_stock,
+		storeCity:product.buybox_winner.fulfillment.pickup_info.store_city,
+		readyInMinutes:product.buybox_winner.fulfillment.pickup_info.ready_in_minutes,
 	}
 	try {
 		const createdProduct = await prisma.product.create({
