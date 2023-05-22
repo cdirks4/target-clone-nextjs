@@ -1,13 +1,14 @@
 'use client';
 import React, { ButtonHTMLAttributes, FC } from 'react';
-import { ExclamationIcon, IconType } from '@heroicons/react/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     onClick: () => void;
-    Icon?: IconType;
+    Icon?: FC<Parameters<typeof MagnifyingGlassIcon>[0]>;
 }
 
 const IconButton: FC<IconButtonProps> = ({
-    Icon = ExclamationIcon,
+    Icon = MagnifyingGlassIcon,
     onClick,
     ...props
 }) => {

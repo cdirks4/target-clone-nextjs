@@ -8,14 +8,14 @@ interface ImageGalleryProps {
 }
 
 const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
-    const [mainImage, setMainImage] = useState(images[0]);
+    const [mainImage, setMainImage] = useState<string>(images[0]);
 
     const handleClick = (image: string) => {
         setMainImage(image);
     };
 
     return (
-        <div className="grid grid-cols-6  col-span-3 gap-2">
+        <div className="grid grid-cols-6 col-span-3 gap-2">
             <div className="col-span-5 relative hover:border-xs">
                 {images.map((image, index) => (
                     <div
