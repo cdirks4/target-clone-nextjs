@@ -24,6 +24,9 @@ module.exports = {
 			dotted: 'dotted',
 			dashed: 'dashed',
 		},
+		screens:{
+			sm: '500px'
+		}
 	},
 	variants: {},
 	plugins: [],
