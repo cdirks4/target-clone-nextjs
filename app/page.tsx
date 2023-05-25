@@ -1,15 +1,34 @@
+import { Collection } from '@prisma/client';
 import prisma from '../lib/prisma';
-import { Product } from '@prisma/client';
-
-const getData = async (): Promise<Product> => {
-    const product = await prisma.product.findFirst();
-    if (!product) {
+import Image from 'next/image';
+import Link from 'next/link';
+const getCollections = async (): Promise<Collection[]> => {
+    const collections = await prisma.collection.findMany();
+    if (!collections) {
         throw new Error('Product not found');
     }
-    return product;
+    return collections;
 };
 
 export default async function ProductRoute() {
-    const product = await getData();
-    return <></>;
+    const collections = await getCollections();
+    return (
+        <div className="w-full flex">
+            {collections.map((collection, index) => {
+                return (
+                    <div key={`collecion-div-${index}`} className=" flex ">
+                        <Link href={`/collection/${collection.id}`}>
+                            <Image
+                                key={`collecion-cover-art-${index}`}
+                                src={collection.coverImage}
+                                alt={`Image ${index + 1}`}
+                                width={140}
+                                height={140}
+                            />
+                        </Link>
+                    </div>
+                );
+            })}
+        </div>
+    );
 }

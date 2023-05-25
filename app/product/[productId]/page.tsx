@@ -1,18 +1,35 @@
-import prisma from '../../lib/prisma';
+import prisma from '../../../lib/prisma';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
-import ImageGallery from './components/ImageGalley';
-import IndividualProductDetails from './components/IndividualProductDetails';
-const getData = async (): Promise<Product> => {
-    const product = await prisma.product.findFirst();
+import ImageGallery from '../components/ImageGalley';
+import IndividualProductDetails from '../components/IndividualProductDetails';
+
+interface PageProps {
+    params: {
+        productId: string;
+    };
+}
+
+const getData = async ({
+    productId,
+}: {
+    productId: string;
+}): Promise<Product> => {
+    const product = await prisma.product.findFirst({
+        where: {
+            id: productId,
+        },
+    });
     if (!product) {
         throw new Error('Product not found');
     }
     return product;
 };
 
-export default async function ProductRoute() {
-    const product = await getData();
+export default async function ProductRoute({
+    params,
+}: PageProps): Promise<JSX.Element> {
+    const product = await getData({ productId: params.productId });
     return (
         <main className="ml-2">
             <div className="m-2 max-w-[1000px] container mx-auto  ">
