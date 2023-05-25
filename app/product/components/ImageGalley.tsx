@@ -28,6 +28,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             key={`top-images-${index}-${image}`}
                             src={image}
                             alt={`Image ${index + 1}`}
+                            quality={100}
                             width={500}
                             height={500}
                         />
@@ -49,6 +50,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                                     src={image}
                                     key={`bottom-images-${index}-${image}`}
                                     alt={`Image ${index + 1}`}
+                                    quality={100}
                                     width={500}
                                     height={500}
                                     className={`w-full h-full object-cover cursor-pointer ${
