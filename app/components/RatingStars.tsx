@@ -9,7 +9,7 @@ interface StarProps {
 const Star: FC<StarProps> = ({ fill, width, height }) => (
     <svg
         aria-hidden="true"
-        className={`w-${width} h-${height} ${fill}`}
+        className={`w-3 h-3 ${fill}`}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const HalfStar: React.FC<StarProps> = ({ width, height }) => (
     <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
-        className={`w-${width} h-${height}`}
+        className={`w-3 h-3`}
         xmlns="http://www.w3.org/2000/svg"
     >
         <defs>
