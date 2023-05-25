@@ -14,9 +14,7 @@ module.exports = {
 			},
 		},
 
-		borderWidth: {
-			xs: '1px',
-		},
+
 		borderColor: {
 			'gray-500': '#718096',
 		},
@@ -24,8 +22,8 @@ module.exports = {
 			dotted: 'dotted',
 			dashed: 'dashed',
 		},
-		screens:{
-			sm: '500px'
+		screens: {
+			sm: '500px',
 		}
 	},
 	variants: {},
