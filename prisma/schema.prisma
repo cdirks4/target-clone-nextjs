@@ -17,19 +17,33 @@ model User {
 }
 
 model Product {
-  id             String   @id @default(uuid()) @db.Uuid
+  id             String      @id @default(uuid()) @db.Uuid
+  tcin           String
   title          String
   brand          String
   price          Float
   rating         Float
-  ratingsTotal   Int      @map("ratings_total")
+  ratingsTotal   Int         @map("ratings_total")
   images         String[]
   videos         String[]
   description    String[]
   highlights     String[]
-  isInStock      Boolean  @map("is_in_stock")
-  storeCity      String   @map("store_city")
-  readyInMinutes Int      @map("ready_in_minutes")
+  isInStock      Boolean     @map("is_in_stock")
+  storeCity      String      @map("store_city")
+  readyInMinutes Int         @map("ready_in_minutes")
+  order          Int
+  collection     Collection? @relation(fields: [collectionId], references: [id])
+  collectionId   String?     @db.Uuid
 
+  @@index([collectionId, order], name: "ProductOrderIndex")
   @@map("product")
+}
+
+model Collection {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  coverImage String
+  products   Product[]
+
+  @@map("collection")
 }

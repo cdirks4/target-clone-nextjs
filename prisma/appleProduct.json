@@ -1,0 +1,462 @@
+{
+    "data": {
+        "product": {
+            "__typename": "Product",
+            "tcin": "54191097",
+            "category": {
+                "parent_category_id": "5xt7d"
+            },
+            "ratings_and_reviews": {
+                "has_verified": true,
+                "statistics": {
+                    "not_recommended_count": 246,
+                    "question_count": 340,
+                    "rating": {
+                        "average": 4.66,
+                        "count": 14286,
+                        "distribution": {
+                            "rating1": 792,
+                            "rating2": 172,
+                            "rating3": 223,
+                            "rating4": 773,
+                            "rating5": 12326
+                        },
+                        "secondary_averages": [
+                            {
+                                "id": "speed",
+                                "label": "speed",
+                                "range": 5,
+                                "type": "RATING",
+                                "value": 4.71
+                            },
+                            {
+                                "id": "Features",
+                                "label": "features",
+                                "range": 5,
+                                "type": "RATING",
+                                "value": 4.66
+                            },
+                            {
+                                "id": "EaseOfUse",
+                                "label": "ease of use",
+                                "range": 5,
+                                "type": "RATING",
+                                "value": 4.72
+                            },
+                            {
+                                "id": "display",
+                                "label": "display",
+                                "range": 5,
+                                "type": "RATING",
+                                "value": 4.74
+                            },
+                            {
+                                "id": "Value",
+                                "label": "value",
+                                "range": 5,
+                                "type": "RATING",
+                                "value": 4.56
+                            }
+                        ]
+                    },
+                    "recommended_count": 2181,
+                    "recommended_percentage": 89,
+                    "review_count": 3063
+                },
+                "most_recent": [
+                    {
+                        "id": "8c9cecb1-3f24-42ea-b401-7794a567172d",
+                        "text": "stay in ears good, awesome volume control, and voice recognition works better with these in then with the phone alone",
+                        "author": {
+                            "nickname": "Amy",
+                            "external_id": "10060362172"
+                        },
+                        "title": "Awesome",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-22T14:36:33.915Z"
+                        }
+                    },
+                    {
+                        "id": "45bc24cc-1551-4f65-879a-027a1d38ac74",
+                        "text": "Work great, wonderful sound quality. Easy to set up and pair with my devices. All over good buy.",
+                        "author": {
+                            "nickname": "Onlymiss",
+                            "external_id": "2112796460"
+                        },
+                        "title": "The Beat Goes On.",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-21T18:44:30.224Z"
+                        }
+                    },
+                    {
+                        "id": "d4f46acf-2d27-46ca-b432-358ed420fe57",
+                        "text": "The comfort in my ear is what attracted me to this product!!!",
+                        "author": {
+                            "nickname": "Desi23",
+                            "external_id": "8021659393"
+                        },
+                        "title": "Airpod Liking",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-21T17:29:29.927Z"
+                        }
+                    },
+                    {
+                        "id": "a34079dd-0eee-464d-b175-5e2a986e12f0",
+                        "text": "Reasonably priced with good sound quality.",
+                        "author": {
+                            "nickname": "Crystal",
+                            "external_id": "20027102032"
+                        },
+                        "title": "Comfortable",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-19T16:26:51.785Z"
+                        }
+                    },
+                    {
+                        "id": "de849b58-2bb4-4106-8533-da66b2d522c5",
+                        "text": "Loses charge fast according to my son. It was a birthday gift.",
+                        "author": {
+                            "nickname": "Jr",
+                            "external_id": "3193147750"
+                        },
+                        "title": "Air pods",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-19T16:05:24.351Z"
+                        }
+                    },
+                    {
+                        "id": "bf1f5f72-a752-4991-93a4-a65196ca0879",
+                        "text": "They were so good someone stole them! They leak a little bit but I love them (loved them)",
+                        "author": {
+                            "nickname": "bananaman",
+                            "external_id": "20041366493"
+                        },
+                        "title": "Pretty good",
+                        "rating": {
+                            "value": 4,
+                            "submitted_at": "2023-05-19T14:26:13.264Z"
+                        }
+                    },
+                    {
+                        "id": "c10cee16-cbaa-4787-9684-307f44ee3b00",
+                        "text": "I love it great packaging great audio and microphone",
+                        "author": {
+                            "nickname": "Luke",
+                            "external_id": "10063559468"
+                        },
+                        "title": "Great 5 stars",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-17T21:18:07.437Z"
+                        }
+                    },
+                    {
+                        "id": "3f773318-0fee-47ba-a7c1-0975e4cc9012",
+                        "text": "Ordering, delivery was fast and easy. These were a gift and the recipient is very pleased. Sound quality, comfort and and ease of use are too notch.",
+                        "author": {
+                            "nickname": "Derek",
+                            "external_id": "20063713072"
+                        },
+                        "title": "Great headphones",
+                        "rating": {
+                            "value": 5,
+                            "submitted_at": "2023-05-17T16:03:38.614Z"
+                        }
+                    }
+                ],
+                "photos": [
+                    "https://target.scene7.com/is/image/Target/GUEST_9e4c85b1-f342-4d66-9894-ea7e12d8843d",
+                    "https://target.scene7.com/is/image/Target/GUEST_cd286e6c-2ffe-4759-a77d-4cad89faf51f",
+                    "https://target.scene7.com/is/image/Target/GUEST_f2885c66-b8d8-4a64-bd13-29e5f0a8143a",
+                    "https://target.scene7.com/is/image/Target/GUEST_90ac30f2-b3d5-4fdf-89b6-c2d19d9fbb64",
+                    "https://target.scene7.com/is/image/Target/GUEST_852a7e17-8d77-43fc-8ac1-ef7a1ec382a2",
+                    "https://target.scene7.com/is/image/Target/GUEST_3e863db3-6923-4002-934c-7730a9669703",
+                    "https://target.scene7.com/is/image/Target/GUEST_143bfce2-d87f-4914-8121-df242d7db058",
+                    "https://target.scene7.com/is/image/Target/GUEST_dbd9a2ab-0ce8-467f-a3f5-0821bec62528",
+                    "https://target.scene7.com/is/image/Target/GUEST_49229d02-9a2e-44bd-a279-72727314509c",
+                    "https://target.scene7.com/is/image/Target/GUEST_79a6b8cc-7c2b-426e-8797-233a281bbe0b",
+                    "https://target.scene7.com/is/image/Target/GUEST_670634aa-e079-459a-aa35-75f2b9fd8b87",
+                    "https://target.scene7.com/is/image/Target/GUEST_0d07d603-e11b-4cea-a537-456c2c8973e7"
+                ]
+            },
+            "esp": {
+                "tcin": "85689116",
+                "enrichment": {
+                    "images": {
+                        "base_url": "//target.scene7.com/is/image/Target/",
+                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_f61d3ed1-6b13-4657-976c-75fefa058d71",
+                        "primary_image": "GUEST_f61d3ed1-6b13-4657-976c-75fefa058d71"
+                    }
+                },
+                "price": {
+                    "formatted_current_price": "$29.00",
+                    "formatted_current_price_type": "reg"
+                },
+                "product_description": {
+                    "title": "2 Year Premium Headphones and Speakers Protection Plan ($.01-$199.99) - Allstate",
+                    "bullet_descriptions": [
+                        "<B>Benefits:</B> No Deductible, 24/7 Support, No Additional Cost",
+                        "<B>Support:</B> Phone, Online",
+                        "<B>Includes:</B> Accidental Damage From Handling Coverage, Failures Due to Spills, Failures Due to Drops",
+                        "<B>Minimum Qualifying Item Price:</B> .01",
+                        "<B>Maximum Qualifying Item Price:</B> 199.99",
+                        "<B>Service plan type:</B> Allstate - Premium Headphones",
+                        "<B>Number of years protected:</B> 2 Years"
+                    ]
+                }
+            },
+            "financing_options": {
+                "channel": "DIGITAL",
+                "providers": [
+                    {
+                        "finance_footer": "Rates are between 10-36% APR. Subject to credit check and approval. Options depend on your purchase amount, and a down payment may be required. Estimated payment amount may exclude taxes and shipping. Payment options through Affirm are provided by these lending partners: <a href='https://www.affirm.com/lenders'>affirm.com/lenders</a>. Please note that you can't use Affirm to pay for pre-ordered items. See <a href='https://www.affirm.com/faqs'>affirm.com/faqs</a> for details.",
+                        "finance_header": "Make easy monthly payments over 3, 6 or 12 months",
+                        "finance_message": "<span style=\"color:grey;\">Pay as low as <span class='affirm-ala-price'>$13</span>/mo with Affirm</span>. <a class='affirm-modal-trigger'>Learn more</a>",
+                        "finance_minimum_loan_amount": 100,
+                        "finance_provider": "Affirm",
+                        "finance_terms": [
+                            {
+                                "amount": 134.34,
+                                "apr": 19.97,
+                                "installment_amount": 44.78,
+                                "installment_count": 3,
+                                "interest_amount": 4.35,
+                                "minimum_loan_amount": 100
+                            },
+                            {
+                                "amount": 137.67,
+                                "apr": 19.98,
+                                "installment_amount": 22.95,
+                                "installment_count": 6,
+                                "interest_amount": 7.68,
+                                "minimum_loan_amount": 100
+                            },
+                            {
+                                "amount": 144.5,
+                                "apr": 20,
+                                "installment_amount": 12.04,
+                                "installment_count": 12,
+                                "interest_amount": 14.51,
+                                "minimum_loan_amount": 100
+                            }
+                        ],
+                        "is_finance_eligible": true,
+                        "is_finance_message_eligible": true
+                    }
+                ]
+            },
+            "item": {
+                "cart_add_on_threshold": 35,
+                "compliance": {
+                    "is_proposition_65": false
+                },
+                "dpci": "057-10-0162",
+                "eligibility_rules": {
+                    "available_to_purchase": {
+                        "start_date_time": "1970-01-01T00:00:00Z"
+                    },
+                    "loyalty_purchase": {},
+                    "hold": {
+                        "is_active": true
+                    },
+                    "scheduled_delivery": {
+                        "is_active": true
+                    },
+                    "ship_to_guest": {
+                        "is_active": true
+                    },
+                    "ship_to_store": {
+                        "is_active": true
+                    }
+                },
+                "enrichment": {
+                    "buy_url": "https://www.target.com/p/apple-airpods-2nd-generation-with-charging-case/-/A-54191097",
+                    "images": {
+                        "base_url": "//target.scene7.com/is/image/Target/",
+                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_5f3edf97-5ea0-4fcf-b3a8-3861a58a3f26",
+                        "primary_image": "GUEST_5f3edf97-5ea0-4fcf-b3a8-3861a58a3f26",
+                        "alternate_images": [
+                            "GUEST_cee01f96-66b6-428c-9de1-eaec40eaca81",
+                            "GUEST_c4a24a85-3687-4cf1-8cd9-7795cf54a19c",
+                            "GUEST_a8c6afb4-9e44-4775-8615-9914518bf83f",
+                            "GƒUEST_f8e373b0-7647-45a8-a1bd-378f8bad679f",
+                            "GUEST_c97b1e7f-f202-42a7-88d6-659176f3d977"
+                        ],
+                        "alternate_image_urls": [
+                            "https://target.scene7.com/is/image/Target/GUEST_cee01f96-66b6-428c-9de1-eaec40eaca81",
+                            "https://target.scene7.com/is/image/Target/GUEST_c4a24a85-3687-4cf1-8cd9-7795cf54a19c",
+                            "https://target.scene7.com/is/image/Target/GUEST_a8c6afb4-9e44-4775-8615-9914518bf83f",
+                            "https://target.scene7.com/is/image/Target/GUEST_f8e373b0-7647-45a8-a1bd-378f8bad679f",
+                            "https://target.scene7.com/is/image/Target/GUEST_c97b1e7f-f202-42a7-88d6-659176f3d977"
+                        ],
+                        "content_labels": [
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_5f3edf97-5ea0-4fcf-b3a8-3861a58a3f26"
+                            },
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_cee01f96-66b6-428c-9de1-eaec40eaca81"
+                            },
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_a8c6afb4-9e44-4775-8615-9914518bf83f"
+                            },
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_c4a24a85-3687-4cf1-8cd9-7795cf54a19c"
+                            },
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_f8e373b0-7647-45a8-a1bd-378f8bad679f"
+                            },
+                            {
+                                "image_url": "https://target.scene7.com/is/image/Target/GUEST_c97b1e7f-f202-42a7-88d6-659176f3d977"
+                            }
+                        ]
+                    },
+                    "videos": [
+                        {
+                            "video_captions": [
+                                {
+                                    "caption_url": "https://target.scene7.com/is/content/Target/GUEST_710ae988-cb81-4827-ae42-689023c1fcd4",
+                                    "language": "EN"
+                                }
+                            ],
+                            "video_files": [
+                                {
+                                    "mime_type": "video/mp4",
+                                    "video_height_pixels": "720",
+                                    "video_url": "https://target.scene7.com/is/content/Target/GUEST_c88dca21-0934-40d5-ba98-6bb9d7af11f5_Flash9_Autox720p_2600k"
+                                }
+                            ],
+                            "video_length_seconds": "30",
+                            "video_poster_image": "https://target.scene7.com/is/image/Target/GUEST_8d01ce3d-14fe-4833-82ae-cd5add231160",
+                            "video_title": "AppleCare+ for AirPods"
+                        }
+                    ],
+                    "return_policies": [
+                        {
+                            "user_type": "best_guest",
+                            "day_count": 45
+                        },
+                        {
+                            "user_type": "regular_guest",
+                            "day_count": 15
+                        }
+                    ]
+                },
+                "environmental_segmentation": {
+                    "is_hazardous_material": false
+                },
+                "formatted_return_method": "This item must be returned to any Target store.",
+                "fulfillment": {
+                    "is_gift_wrap_eligible": true,
+                    "po_box_prohibited_message": "We regret that this item cannot be shipped to PO Boxes.",
+                    "purchase_limit": 2,
+                    "shipping_exclusion_codes": [
+                        "Virgin Islands, U.S.",
+                        "United States Minor Outlying Islands",
+                        "Northern Mariana Islands",
+                        "Guam (see also separate entry under GU)",
+                        "APO/FPO",
+                        "American Samoa (see also separate entry under AS)",
+                        "Puerto Rico (see also separate entry under PR)"
+                    ]
+                },
+                "handling": {
+                    "import_designation_description": "Imported"
+                },
+                "is_limited_time_offer": false,
+                "merchandise_classification": {
+                    "class_id": 10,
+                    "department_id": 57,
+                    "department_name": "PORTABLE ELECTRONICS"
+                },
+                "mmbv_content": {
+                    "street_date": "2019-03-29"
+                },
+                "package_dimensions": {
+                    "depth": 4,
+                    "dimension_unit_of_measure": "INCH",
+                    "height": 1,
+                    "weight": 0.42,
+                    "weight_unit_of_measure": "POUND",
+                    "width": 4
+                },
+                "primary_barcode": "190199098428",
+                "primary_brand": {
+                    "canonical_url": "/b/apple/-/N-5y3ej",
+                    "linking_id": "5y3ej",
+                    "name": "Apple"
+                },
+                "product_description": {
+                    "bullet_descriptions": [
+                        "<B>Weight:</B> 1.34 ounces",
+                        "<B>Water Resistance:</B> No Water Resistance Rating",
+                        "<B>Ear Cushion Material:</B> ABS (Acrylonitrile Butadiene Styrene)",
+                        "<B>Estimated Charge Time:</B> 15 minutes",
+                        "<B>Electronics Features:</B> Siri Built-in",
+                        "<B>Connection Type:</B> No Wired Connection Ports",
+                        "<B>Wireless Technology:</B> True Wireless",
+                        "<B>Package Quantity:</B> 1",
+                        "<B>Compatible With:</B> Apple iOS, Apple iPadOS, macOS, Watch OS",
+                        "<B>Model name:</B> MV7N2AM/A",
+                        "<B>Microphone:</B> Built-In Microphone",
+                        "<B>Maximum Battery Charge Life:</B> 5 Hours",
+                        "<B>Battery:</B> 3 Non-Universal Lithium Ion, Required, Included",
+                        "<B>Warranty:</B> 1 Year Limited Warranty. To obtain a copy of the manufacturer's or supplier's warranty for this item prior to purchasing the item, please call Target Guest Services at 1-800-591-3869"
+                    ],
+                    "downstream_description": "AirPods deliver high-quality sound and voice-activated Siri¹ for an unparalleled wireless headphone experience. They’re ready to use with all of your devices. Put them in your ears and they connect immediately. Just like magic.<br /><br />What’s in the Box<br />AirPods<br />Charging Case<br />Lightning to USB-A Cable<br />Documentation<br /><br />Legal<br />¹Siri may not be available in all languages or in all areas, and features may vary by area.<br />²Requires an iCloud account and macOS 11.1, iOS 14.3, iPadOS 14.3, watchOS 7.2, or tvOS 14.3 or later.<br />³Battery life varies by use and configuration. See apple.com/batteries for details.<br /><br />Protect your AirPods by purchasing AppleCare+ at your local Target<br /><br />AppleCare+ extends your coverage to two years from your AppleCare+ purchase date and adds up to two incidents of accidental damage coverage, each subject to a service fee of $29 plus applicable tax.<br />24/7 priority access to Apple experts by chat or phone<br />Mail-in or carry-in repairs<br />Express Replacement Service<br />Hardware coverage for your headphones and battery<br />Coverage for up to two incidents of accidental damage from handling, each subject to a service fee of $29 plus applicable tax<br />Get direct access to Apple experts for questions on a wide range of topics, including Using Siri and Bluetooth connectivity<br />AppleCare products must be purchased with an applicable Apple device. <br />Terms & Conditions will be delivered via email post-enrollment or by visiting www.apple.com/support/products/<br /><br />Purchase at your local Target. Not currently available online.<br />",
+                    "soft_bullet_description": "&bull;Universal fit that’s comfortable all day<br>&bull;Automatically on, automatically connected<br>&bull;Easy setup for all your Apple devices³<br>&bull;Quick access to Siri by saying “Hey Siri”¹<br>&bull;Easily share audio between two sets of AirPods on your iPhone, iPad, iPod touch, or Apple TV<br>&bull;Seamless switching between Apple devices³<br>&bull;The charging case delivers more than 24 hours of battery life²",
+                    "soft_bullets": {
+                        "bullets": [
+                            "Universal fit that’s comfortable all day",
+                            "Automatically on, automatically connected",
+                            "Easy setup for all your Apple devices³",
+                            "Quick access to Siri by saying “Hey Siri”¹",
+                            "Easily share audio between two sets of AirPods on your iPhone, iPad, iPod touch, or Apple TV",
+                            "Seamless switching between Apple devices³",
+                            "The charging case delivers more than 24 hours of battery life²"
+                        ],
+                        "title": "highlights"
+                    },
+                    "title": "Apple AirPods (2nd Generation) with Charging Case"
+                },
+                "product_vendors": [
+                    {
+                        "id": "1113705",
+                        "vendor_name": "APPLE COMPUTER INC"
+                    }
+                ],
+                "relationship_type_code": "SA",
+                "return_policies_guest_message": "This item must be returned within 15 days of the date it was purchased in store, shipped, delivered by a Shipt shopper, or made ready for pickup.",
+                "wellness_merchandise_attributes": [
+                    {
+                        "parent_id": "108257",
+                        "value_id": "844316",
+                        "value_name": "True Wireless",
+                        "badge_url": "https://target.scene7.com/is/image/Target/GUEST_5b9dcac0-7eb7-4f52-91ac-59a51ac5c042",
+                        "wellness_description": "Ear buds that are designed without a cord or wire and is connected via Bluetooth"
+                    },
+                    {
+                        "parent_id": "1225338992",
+                        "value_id": "843709",
+                        "value_name": "Built-In Microphone",
+                        "badge_url": "https://target.scene7.com/is/image/Target/GUEST_69e6bc10-ff55-4e62-9c7d-737e2c21b3b1",
+                        "wellness_description": "Comes with a microphone that is used for recording"
+                    }
+                ]
+            },
+            "price": {
+                "formatted_current_price": "$129.99",
+                "formatted_current_price_type": "reg",
+                "location_id": 3991,
+                "current_retail": 129.99,
+                "external_system_id": "54191097-1634673619927",
+                "reg_retail": 129.99,
+                "is_current_price_range": false
+            }
+        }
+    }
+}
