@@ -1,6 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const { HttpsProxyAgent } = require('https-proxy-agent');
+
 const collectionOfAppleProducts = require('./secondSeed.json');
 async function main() {
 
