@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 
 interface StarProps {
-    fill: string;
+    width?: number;
+    height?: number;
+    fill?: string;
 }
 
-const Star: FC<StarProps> = ({ fill }) => (
+const Star: FC<StarProps> = ({ fill, width, height }) => (
     <svg
         aria-hidden="true"
-        className={`w-5 h-5 ${fill}`}
+        className={`w-${width} h-${height} ${fill}`}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,11 +25,11 @@ const Star: FC<StarProps> = ({ fill }) => (
     </svg>
 );
 
-const HalfStar: React.FC = () => (
+const HalfStar: React.FC<StarProps> = ({ width, height }) => (
     <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
-        className="w-5 h-5"
+        className={`w-${width} h-${height}`}
         xmlns="http://www.w3.org/2000/svg"
     >
         <defs>
@@ -46,9 +48,11 @@ const HalfStar: React.FC = () => (
 
 interface RatingStarsProps {
     rating: number;
+    width?: number;
+    height?: number;
 }
 
-const RatingStars: FC<RatingStarsProps> = ({ rating }) => {
+const RatingStars: FC<RatingStarsProps> = ({ rating, width, height }) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
     const emptyStars = 5 - fullStars - halfStar;
@@ -56,13 +60,16 @@ const RatingStars: FC<RatingStarsProps> = ({ rating }) => {
     return (
         <div className="flex items-center rating rating-md">
             {[...Array(fullStars)].map((_, i) => (
-                <Star key={i} fill="text-yellow-400" />
+                <Star key={i} {...{ width, height, fill: 'text-yellow-400' }} />
             ))}
             {[...Array(halfStar)].map((_, i) => (
-                <HalfStar key={i + halfStar} />
+                <HalfStar key={i + halfStar} {...{ width, height }} />
             ))}
             {[...Array(emptyStars)].map((_, i) => (
-                <Star key={i + fullStars + halfStar} fill="text-gray-300" />
+                <Star
+                    key={i + fullStars + halfStar}
+                    {...{ width, height, fill: 'text-gray-300' }}
+                />
             ))}
         </div>
     );
