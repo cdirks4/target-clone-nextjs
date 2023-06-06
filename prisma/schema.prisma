@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -33,9 +30,10 @@ model Product {
   readyInMinutes Int         @map("ready_in_minutes")
   order          Int
   collection     Collection? @relation(fields: [collectionId], references: [id])
-  collectionId   String?     @db.Uuid
+  collectionId   String?     @map("collection_id") @db.Uuid
+  cart           Cart?       @relation(fields: [cartId], references: [id])
+  cartId         String?     @map("cart_id") @db.Uuid
 
-  @@index([collectionId, order], name: "ProductOrderIndex")
   @@map("product")
 }
 
@@ -46,4 +44,11 @@ model Collection {
   products   Product[]
 
   @@map("collection")
+}
+
+model Cart {
+  id       String    @id @default(uuid()) @db.Uuid
+  products Product[]
+
+  @@map("cart")
 }

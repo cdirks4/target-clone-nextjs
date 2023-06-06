@@ -8,7 +8,8 @@
 
 */
 -- AlterTable
-ALTER TABLE "product" ADD COLUMN     "collectionId" UUID,
+ALTER TABLE "product" ADD COLUMN     "cart_id" UUID,
+ADD COLUMN     "collection_id" UUID,
 ADD COLUMN     "order" INTEGER NOT NULL,
 ADD COLUMN     "tcin" TEXT NOT NULL,
 ALTER COLUMN "ready_in_minutes" SET NOT NULL,
@@ -23,8 +24,15 @@ CREATE TABLE "collection" (
     CONSTRAINT "collection_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
-CREATE INDEX "ProductOrderIndex" ON "product"("collectionId", "order");
+-- CreateTable
+CREATE TABLE "cart" (
+    "id" UUID NOT NULL,
+
+    CONSTRAINT "cart_pkey" PRIMARY KEY ("id")
+);
 
 -- AddForeignKey
-ALTER TABLE "product" ADD CONSTRAINT "product_collectionId_fkey" FOREIGN KEY ("collectionId") REFERENCES "collection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "product" ADD CONSTRAINT "product_collection_id_fkey" FOREIGN KEY ("collection_id") REFERENCES "collection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "product" ADD CONSTRAINT "product_cart_id_fkey" FOREIGN KEY ("cart_id") REFERENCES "cart"("id") ON DELETE SET NULL ON UPDATE CASCADE;
