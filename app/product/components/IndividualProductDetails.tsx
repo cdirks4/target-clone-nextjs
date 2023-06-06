@@ -15,7 +15,7 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
         <div className="col-span-2">
             <h2>${price}</h2>
             <p className="text-xs">When purchased online</p>
-            <RatingStars rating={rating} width={3} height={5} />
+            <RatingStars rating={rating} />
             <div className="grid gap-2 grid-cols-3 h-32">
                 <div className="border rounded-lg h-full">
                     <h2 className="font-bold text-sm">Pickup</h2>

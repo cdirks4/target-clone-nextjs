@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
 
 interface StarProps {
-    width?: number;
-    height?: number;
     fill?: string;
 }
 
-const Star: FC<StarProps> = ({ fill, width, height }) => (
+const Star: FC<StarProps> = ({ fill }) => (
     <svg
         aria-hidden="true"
         className={`w-3 h-3 ${fill}`}
@@ -25,7 +23,7 @@ const Star: FC<StarProps> = ({ fill, width, height }) => (
     </svg>
 );
 
-const HalfStar: React.FC<StarProps> = ({ width, height }) => (
+const HalfStar: React.FC<StarProps> = ({}) => (
     <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
@@ -48,11 +46,9 @@ const HalfStar: React.FC<StarProps> = ({ width, height }) => (
 
 interface RatingStarsProps {
     rating: number;
-    width?: number;
-    height?: number;
 }
 
-const RatingStars: FC<RatingStarsProps> = ({ rating, width, height }) => {
+const RatingStars: FC<RatingStarsProps> = ({ rating }) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
     const emptyStars = 5 - fullStars - halfStar;
@@ -60,15 +56,15 @@ const RatingStars: FC<RatingStarsProps> = ({ rating, width, height }) => {
     return (
         <div className="flex items-center rating rating-md">
             {[...Array(fullStars)].map((_, i) => (
-                <Star key={i} {...{ width, height, fill: 'text-yellow-400' }} />
+                <Star key={i} {...{ fill: 'text-yellow-400' }} />
             ))}
             {[...Array(halfStar)].map((_, i) => (
-                <HalfStar key={i + halfStar} {...{ width, height }} />
+                <HalfStar key={i + halfStar} {...{}} />
             ))}
             {[...Array(emptyStars)].map((_, i) => (
                 <Star
                     key={i + fullStars + halfStar}
-                    {...{ width, height, fill: 'text-gray-300' }}
+                    {...{ fill: 'text-gray-300' }}
                 />
             ))}
         </div>
