@@ -1,7 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC } from 'react';
+import { UserButton } from '@clerk/nextjs';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-
+import prisma from '../../lib/prisma';
 import Link from 'next/link';
+
 const SearchBar: FC = () => {
     return (
         <div className="relative bg-white w-full h-16 flex items-center justify-around shadow-lg ">
@@ -22,6 +25,9 @@ const SearchBar: FC = () => {
                 className="h-9 bg-gray-100 rounded-lg flex items-center"
             ></div>
             <div></div>
+            <div>
+                <UserButton afterSignOutUrl="/" />
+            </div>{' '}
             <ShoppingCartIcon className="h-6 w-6 text-gray-500  " />
         </div>
     );
