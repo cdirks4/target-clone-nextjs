@@ -8,9 +8,11 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id         String @id @default(uuid()) @db.Uuid
+  externalId String @unique
+  Cart       Cart?
+
+  @@map("user")
 }
 
 model Product {
@@ -49,6 +51,8 @@ model Collection {
 model Cart {
   id       String    @id @default(uuid()) @db.Uuid
   products Product[]
+  owner    User      @relation(fields: [ownerId], references: [id])
+  ownerId  String    @unique @map("owner_id") @db.Uuid
 
   @@map("cart")
 }
