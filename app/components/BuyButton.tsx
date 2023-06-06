@@ -11,16 +11,13 @@ const BuyButton: React.FC<Props> = ({ productId }) => {
     const handleAddToCart = async () => {
         setIsLoading(true);
         try {
-            const cartResponse = await fetch(
-                `/api/cart/6d68ed14-4fbc-47ef-9889-cf3a7cf783e5`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ productId }),
-                }
-            );
+            const cartResponse = await fetch(`/api/cart`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId }),
+            });
             const cart = await cartResponse.json();
         } catch (error) {
             console.error(
