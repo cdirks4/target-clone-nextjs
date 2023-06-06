@@ -1,15 +1,5 @@
-// MainComponent.tsx
-/* eslint-disable @next/next/no-img-element */
-'use client';
-
-import React, { useState, FC } from 'react';
-import {
-    ShoppingCartIcon,
-    MagnifyingGlassIcon,
-    UserCircleIcon,
-    Bars3Icon,
-} from '@heroicons/react/24/outline';
-import IconButton from './IconButton';
+import React, { FC } from 'react';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 import Link from 'next/link';
 const SearchBar: FC = () => {
@@ -30,23 +20,8 @@ const SearchBar: FC = () => {
             <div
                 id="hamburger-display-button"
                 className="h-9 bg-gray-100 rounded-lg flex items-center"
-            >
-                <input
-                    type="text"
-                    className="min-w-[300px] text-xs placeholder-gray-500 rounded-lg h-9 bg-gray-100 border-transparent !outline-none"
-                    placeholder="What can we help you find?"
-                ></input>
-                <IconButton
-                    Icon={MagnifyingGlassIcon}
-                    onClick={() => console.log('ToDo')}
-                />
-            </div>
-            <div>
-                <IconButton
-                    Icon={UserCircleIcon}
-                    onClick={() => console.log('ToDo')}
-                ></IconButton>
-            </div>
+            ></div>
+            <div></div>
             <ShoppingCartIcon className="h-6 w-6 text-gray-500  " />
         </div>
     );
