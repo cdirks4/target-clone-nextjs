@@ -50,10 +50,10 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                     {product.title}
                 </h3>
                 <p className="text-[9px]">{product.brand}</p>
-                <RatingStars rating={product.rating} width={3} height={3} />
+                <RatingStars rating={product.rating} />
                 <p className="text-xs">${product.price}</p>
                 <p className="text-[9px] mb-4">When purchased online</p>
-                <BuyButton></BuyButton>
+                <BuyButton productId={product.id}></BuyButton>
             </div>
         </div>
     );
