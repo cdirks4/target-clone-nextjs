@@ -32,3 +32,23 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(error);
     }
 }
+
+export async function GET(request: NextRequest) {
+    try {
+        const { userId } = getAuth(request);
+        if (userId) {
+            const user = await prisma.user.findFirstOrThrow({
+                where: {
+                    externalId: userId,
+                },
+            });
+            const cart = await prisma.cart.findUnique({
+                where: { ownerId: user.id },
+                include: { products: true },
+            });
+            return NextResponse.json(cart);
+        }
+    } catch (error) {
+        return NextResponse.json(error);
+    }
+}

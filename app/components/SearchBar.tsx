@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from 'react';
+'use client';
+import React, { FC, useContext } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import prisma from '../../lib/prisma';
+import { CartContext } from '../context/CartContext';
 import Link from 'next/link';
 
 const SearchBar: FC = () => {
+    const { cartProducts } = useContext(CartContext);
     return (
         <div className="relative bg-white w-full h-16 flex items-center justify-around shadow-lg ">
             <Link
@@ -28,7 +30,10 @@ const SearchBar: FC = () => {
             <div>
                 <UserButton afterSignOutUrl="/" />
             </div>{' '}
-            <ShoppingCartIcon className="h-6 w-6 text-gray-500  " />
+            <Link href="/cart">
+                <ShoppingCartIcon className="h-6 w-6 text-gray-500  " />
+            </Link>
+            <p className="text-red-500">{cartProducts.length}</p>
         </div>
     );
 };

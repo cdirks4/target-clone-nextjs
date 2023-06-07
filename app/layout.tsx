@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import SearchBar from './components/SearchBar';
 import Navbar from './components/Navbar';
 import { ClerkProvider } from '@clerk/nextjs';
+import { CartProvider } from './context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({
             <html lang="en">
                 <body className={inter.className}>
                     <Navbar></Navbar>
-                    <SearchBar></SearchBar>
-                    {children}
+                    <CartProvider>
+                        <SearchBar></SearchBar>
+                        {children}
+                    </CartProvider>
                 </body>
             </html>
         </ClerkProvider>
