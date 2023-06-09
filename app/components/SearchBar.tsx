@@ -30,10 +30,18 @@ const SearchBar: FC = () => {
             <div>
                 <UserButton afterSignOutUrl="/" />
             </div>{' '}
-            <Link href="/cart">
-                <ShoppingCartIcon className="h-6 w-6 text-gray-500  " />
-            </Link>
-            <p className="text-red-500">{cartProducts.length}</p>
+            <div className="relative">
+                <Link href="/cart">
+                    <ShoppingCartIcon className="h-6 w-6 text-gray-500" />
+                </Link>
+                {cartProducts.length > 0 && (
+                    <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                        <div className="flex items-center justify-center w-4 h-4 bg-red-600 rounded-full text-white">
+                            <p className="text-[8px]">{cartProducts.length}</p>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
