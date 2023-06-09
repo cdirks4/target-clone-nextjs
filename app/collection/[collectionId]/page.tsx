@@ -4,7 +4,7 @@ import { Collection, Product } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import RatingStars from '../../components/RatingStars';
-import BuyButton from '../../components/BuyButton';
+import { AddToCartButton } from '../../components/CartActions';
 interface PageProps {
     params: {
         collectionId: string;
@@ -53,7 +53,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                 <RatingStars rating={product.rating} />
                 <p className="text-xs">${product.price}</p>
                 <p className="text-[9px] mb-4">When purchased online</p>
-                <BuyButton productId={product.id}></BuyButton>
+                <AddToCartButton productId={product.id}></AddToCartButton>
             </div>
         </div>
     );

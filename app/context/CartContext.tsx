@@ -4,12 +4,12 @@ import { Product } from '@prisma/client';
 
 type CartContextType = {
     cartProducts: Product[];
-    addToCart: (product: Product) => void;
+    addProductToCart: (productId: string) => Promise<void>;
 };
 
 const CartContext = createContext<CartContextType>({
     cartProducts: [],
-    addToCart: () => {},
+    addProductToCart: () => Promise.resolve(),
 });
 
 const CartProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -28,10 +28,28 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         fetchCartProducts();
     }, []);
 
-    const addToCart = async (product: Product) => {};
+    const addProductToCart = async (productId: string): Promise<void> => {
+        try {
+            const updatedCartResponse = await fetch(`/api/cart`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ productId }),
+            });
+            const { products } = await updatedCartResponse.json();
+            setCartProducts(products);
+            return;
+        } catch (error) {
+            console.error(
+                'An error occurred while adding the product to cart:',
+                error
+            );
+        }
+    };
 
     return (
-        <CartContext.Provider value={{ cartProducts, addToCart }}>
+        <CartContext.Provider value={{ cartProducts, addProductToCart }}>
             {children}
         </CartContext.Provider>
     );
