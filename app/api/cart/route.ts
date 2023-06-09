@@ -25,10 +25,15 @@ export async function POST(request: NextRequest) {
                         connect: { id: productId },
                     },
                 },
+                include: {
+                    products: true,
+                },
             });
+
             return NextResponse.json(cart);
         }
     } catch (error) {
+        console.log(error);
         return NextResponse.json(error);
     }
 }
