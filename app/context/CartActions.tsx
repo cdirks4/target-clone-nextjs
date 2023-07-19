@@ -1,12 +1,16 @@
 'use client';
 import React, { useContext, useState } from 'react';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from './CartContext';
 
 interface AddToCartButtonProps {
     productId: string;
+    textSize: string;
 }
 
-const AddToCartButton: React.FC<AddToCartButtonProps> = ({ productId }) => {
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({
+    productId,
+    textSize = '10',
+}) => {
     const { addProductToCart } = useContext(CartContext);
     const [isAddingToCart, setIsAddingToCart] = useState(false);
 
@@ -15,11 +19,12 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ productId }) => {
         await addProductToCart(productId);
         setIsAddingToCart(false);
     };
+
     return (
         <div>
             <button
                 onClick={handleAddToCart}
-                className="bg-red-700 text-white rounded text-[10px] min-h-[30px] p-1 font-bold"
+                className={`bg-red-700 text-white rounded text-[${textSize}px] min-h-[30px] p-1 font-bold w-full h-full`}
                 disabled={isAddingToCart}
             >
                 <Spinner
