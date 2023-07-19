@@ -23,7 +23,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ title, isActive }) => {
 };
 interface Props {
     highlights: string[];
-    description: string;
+    description: string[];
 }
 const AboutProduct: React.FC<Props> = ({ highlights, description }) => {
     return (

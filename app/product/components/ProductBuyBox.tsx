@@ -5,6 +5,7 @@ interface IndividualProductProps {
     price: number;
     rating: number;
     readyInMinutes: number | null;
+    productId: string;
 }
 const IndividualProductDetails: FC<IndividualProductProps> = ({
     price,
