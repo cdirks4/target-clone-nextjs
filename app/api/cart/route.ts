@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         const { userId } = getAuth(request);
         const user = await prisma.user.findUnique({
             where: {
-                externalId: userId ? userId : process.env.TES_CLERK_USER,
+                externalId: userId ? userId : process.env.TEST_CLERK_USER,
             },
         });
         const { productId } = await request.json();
