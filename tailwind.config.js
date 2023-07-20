@@ -13,18 +13,6 @@ module.exports = {
 					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
 		},
-
-
-		borderColor: {
-			'gray-500': '#718096',
-		},
-		borderStyle: {
-			dotted: 'dotted',
-			dashed: 'dashed',
-		},
-		screens: {
-			sm: '500px',
-		}
 	},
 	variants: {},
 	plugins: [],
