@@ -53,9 +53,9 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                 <RatingStars rating={product.rating} />
                 <p className="text-xs">${product.price}</p>
                 <p className="text-[9px] mb-4">When purchased online</p>
-                <div className="w-[80px]">
+                <div className="sm:w-[80px] w-14">
                     <AddToCartButton
-                        textSize="10"
+                        textSize="8"
                         productId={product.id}
                     ></AddToCartButton>
                 </div>
@@ -67,7 +67,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
 
     return (
         <div className="mx-auto max-w-[1000px]">
-            <div className="mx-auto grid gap-[1px] bg-gray-200 sm:grid-cols-3 grid-cols-2">
+            <div className="mx-auto grid gap-[1px] bg-gray-200 sm:grid-cols-3 md:grid-cols-4 grid-cols-3">
                 {collection.products.map(ProductCard)}
             </div>
         </div>
