@@ -69,19 +69,21 @@ export default function CartPage({}: Props) {
                                 </h2>
                                 <select
                                     className="border-gray-400 text-gray-400 rounded-sm border cursor-pointer text-[10px] p-1"
-                                    value={`Qty ${product.quantity}`}
+                                    value={`Qty }`}
                                     onChange={(event) =>
                                         handleQuantityChange(event, product.id)
                                     }
                                 >
-                                    {[...Array(10).keys()].map((value) => (
-                                        <option
-                                            key={`Qty ${value}`}
-                                            value={`Qty ${value + 1}`}
-                                        >
-                                            Qty {value + 1}
-                                        </option>
-                                    ))}
+                                    {Array.from(Array(10).keys()).map(
+                                        (value) => (
+                                            <option
+                                                key={`Qty ${value}`}
+                                                value={`Qty ${value + 1}`}
+                                            >
+                                                Qty {value + 1}
+                                            </option>
+                                        )
+                                    )}
                                 </select>
                             </div>
                         </div>
