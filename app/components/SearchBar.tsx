@@ -2,12 +2,14 @@
 'use client';
 import React, { FC, useContext } from 'react';
 import { UserButton } from '@clerk/nextjs';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { CartContext } from '../context/CartContext';
 import Link from 'next/link';
+import { useUser } from '@clerk/clerk-react';
 
 const SearchBar: FC = () => {
     const { cartProducts } = useContext(CartContext);
+    const { isSignedIn } = useUser();
     return (
         <div className="relative bg-white w-full h-16 flex items-center justify-around shadow-lg ">
             <Link
@@ -26,15 +28,23 @@ const SearchBar: FC = () => {
                 id="hamburger-display-button"
                 className="h-9 bg-gray-100 rounded-lg flex items-center"
             ></div>
-            <div></div>
             <div>
-                <UserButton afterSignOutUrl="/" />
+                {!isSignedIn ? (
+                    <Link href="/sign-in" className="flex  text-center">
+                        <UserCircleIcon className="h-6 w-6 text-gray-500" />
+                        <p className="text-gray-500 text-xs  ml-[3px] mt-[3px]">
+                            Sign In
+                        </p>
+                    </Link>
+                ) : (
+                    <UserButton afterSignOutUrl="/" />
+                )}
             </div>{' '}
             <div className="relative">
                 <Link href="/cart">
                     <ShoppingCartIcon className="h-6 w-6 text-gray-500" />
                 </Link>
-                {cartProducts.length > 0 && (
+                {cartProducts?.length > 0 && (
                     <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
                         <div className="flex items-center justify-center w-4 h-4 bg-red-600 rounded-full text-white">
                             <p className="text-[8px]">{cartProducts.length}</p>
