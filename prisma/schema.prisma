@@ -16,25 +16,24 @@ model User {
 }
 
 model Product {
-  id             String      @id @default(uuid()) @db.Uuid
+  id             String          @id @default(uuid()) @db.Uuid
   tcin           String
   title          String
   brand          String
   price          Float
   rating         Float
-  ratingsTotal   Int         @map("ratings_total")
+  ratingsTotal   Int             @map("ratings_total")
   images         String[]
   videos         String[]
   description    String[]
   highlights     String[]
-  isInStock      Boolean     @map("is_in_stock")
-  storeCity      String      @map("store_city")
-  readyInMinutes Int         @map("ready_in_minutes")
+  isInStock      Boolean         @map("is_in_stock")
+  storeCity      String          @map("store_city")
+  readyInMinutes Int             @map("ready_in_minutes")
   order          Int
-  collection     Collection? @relation(fields: [collectionId], references: [id])
-  collectionId   String?     @map("collection_id") @db.Uuid
-  cart           Cart?       @relation(fields: [cartId], references: [id])
-  cartId         String?     @map("cart_id") @db.Uuid
+  collection     Collection?     @relation(fields: [collectionId], references: [id])
+  collectionId   String?         @map("collection_id") @db.Uuid
+  ProductToCart  ProductToCart[]
 
   @@map("product")
 }
@@ -48,11 +47,29 @@ model Collection {
   @@map("collection")
 }
 
+model ProductToCart {
+  id        String    @id @default(uuid()) @db.Uuid
+  quantity  Int
+  orderType OrderType @default(PICKUP)
+  product   Product   @relation(fields: [productId], references: [id])
+  productId String    @map("product_id") @db.Uuid
+  cart      Cart      @relation(fields: [cartId], references: [id])
+  cartId    String    @map("cart_id") @db.Uuid
+
+  @@map("product_to_cart")
+}
+
 model Cart {
-  id       String    @id @default(uuid()) @db.Uuid
-  products Product[]
-  owner    User      @relation(fields: [ownerId], references: [id])
-  ownerId  String    @unique @map("owner_id") @db.Uuid
+  id       String          @id @default(uuid()) @db.Uuid
+  products ProductToCart[]
+  owner    User            @relation(fields: [ownerId], references: [id])
+  ownerId  String          @unique @map("owner_id") @db.Uuid
 
   @@map("cart")
+}
+
+enum OrderType {
+  PICKUP
+  DELIVERY
+  SHIPPING
 }
