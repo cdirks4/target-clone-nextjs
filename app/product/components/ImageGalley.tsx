@@ -20,7 +20,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
         return images.slice(0, maxImagesToShow).map((image, index) => (
             <div
                 key={`top-images-div-${index}`}
-                className={`absolute object-cover transition-opacity duration-500 ${
+                className={`absolute object-cover transition-opacity duration-500  ${
                     image === mainImage ? 'opacity-100' : 'opacity-0'
                 }`}
             >
@@ -29,8 +29,8 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                     src={image}
                     alt={`Image ${index + 1}`}
                     quality={100}
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={400}
                 />
             </div>
         ));
@@ -56,8 +56,8 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             key={`bottom-images-${index}-${image}`}
                             alt={`Image ${index + 1}`}
                             quality={100}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={300}
                             className="w-full h-full object-cover cursor-pointer"
                         />
                         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">

@@ -1,13 +1,19 @@
-import React, { FC } from 'react';
+'use client';
+import React, { FC, useState } from 'react';
+import Image from 'next/image';
 import RatingStars from '../../components/RatingStars';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { AddToCartButton } from '../../context/CartActions';
+
 interface IndividualProductProps {
+    title: string;
     price: number;
     rating: number;
-    readyInMinutes: number | null;
+    readyInMinutes: number;
     productId: string;
 }
 const IndividualProductDetails: FC<IndividualProductProps> = ({
+    title,
     price,
     rating,
     readyInMinutes,
@@ -15,28 +21,29 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
 }) => {
     return (
         <div className="col-span-2">
-            <h2>${price}</h2>
-            <p className="text-xs mb-1">When purchased online</p>
+            <h1 className="text-md font-bold mb-1">{title}</h1>
             <RatingStars rating={rating} />
-            <div className="grid gap-2 grid-cols-3 h-full mt-2">
-                <div className="border rounded-lg h-28">
-                    <h2 className="font-bold text-sm  m-2">Pickup</h2>
-                    {readyInMinutes !== null ? (
-                        <p className="text-[10px] text-gray-400  ml-2">
-                            {`Ready in ${readyInMinutes / 60} hours`}
-                            {readyInMinutes % 60 > 0 &&
-                                ` and ${readyInMinutes % 60} minutes`}
-                        </p>
-                    ) : (
-                        <p>Unavailable</p>
-                    )}
-                </div>
-                <div className="border h-28 rounded-lg ">
-                    <h2 className="font-bold text-sm m-2">Delivery</h2>
-                </div>
-                <div className="border h-28 rounded-lg">
-                    <h2 className="font-bold text-sm  m-2">Shipping</h2>
-                </div>
+            <h2 className="font-bold mt-1 mb-1">${price}</h2>
+            <div className="flex">
+                <p className="text-xs mb-1 mr-1">When purchased online</p>
+                <InformationCircleIcon className="h-4"></InformationCircleIcon>
+            </div>
+            <div className="grid gap-2 grid-cols-3  mt-2">
+                <OrderTypeComponent
+                    {...{ readyInMinutes }}
+                ></OrderTypeComponent>
+
+                <select
+                    className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1 h-8"
+                    value={`Qty }`}
+                    onChange={() => {}}
+                >
+                    {Array.from(Array(10).keys()).map((value) => (
+                        <option key={`Qty ${value}`} value={`Qty ${value + 1}`}>
+                            Qty {value + 1}
+                        </option>
+                    ))}
+                </select>
                 <div className="w-full h-28 col-span-2 col-start-2">
                     <AddToCartButton
                         textSize="10"
@@ -45,6 +52,179 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
                 </div>
             </div>
         </div>
+    );
+};
+
+type OrderTypeProps = {
+    readyInMinutes: number;
+};
+
+const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
+    const [selectedOrderType, setSelectedOrderType] = useState<
+        'Pickup' | 'Delivery' | 'Shipping'
+    >('Pickup');
+
+    const handleOrderTypeChange = (
+        orderType: 'Pickup' | 'Delivery' | 'Shipping'
+    ) => {
+        setSelectedOrderType(orderType);
+    };
+
+    const handleKeyDown = (
+        event: React.KeyboardEvent<HTMLDivElement>,
+        orderType: 'Pickup' | 'Delivery' | 'Shipping'
+    ) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            handleOrderTypeChange(orderType);
+        }
+    };
+
+    const getTwoDaysFromDate = () => {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 2);
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+        };
+        return currentDate.toLocaleDateString('en-US', options);
+    };
+    return (
+        <>
+            <div
+                tabIndex={0}
+                className={`border rounded-lg h-28 p-2 cursor-pointer ${
+                    selectedOrderType === 'Pickup'
+                        ? 'border-green-500 border-2'
+                        : 'border-black'
+                }`}
+                onClick={() => handleOrderTypeChange('Pickup')}
+                onKeyDown={(event) => handleKeyDown(event, 'Pickup')}
+            >
+                <Image
+                    className=""
+                    src={
+                        'https://target.scene7.com/is/image/Target/GUEST_afff1972-2eb2-4633-814c-ddd5fa866308'
+                    }
+                    width={20}
+                    height={20}
+                    alt={`Target Pickup Image`}
+                />
+
+                <h2 className="font-bold text-sm">Pickup</h2>
+                {readyInMinutes !== null ? (
+                    <p className="text-[10px] text-gray-600">
+                        {`Ready within ${Math.floor(
+                            readyInMinutes / 60
+                        )} hours`}
+                        {readyInMinutes % 60 > 0 &&
+                            ` and ${readyInMinutes % 60} minutes`}
+                    </p>
+                ) : (
+                    <p>Unavailable</p>
+                )}
+            </div>
+
+            <div
+                tabIndex={0}
+                className={`border rounded-lg h-28 p-2 cursor-pointer ${
+                    selectedOrderType === 'Delivery'
+                        ? 'border-green-500 border-2'
+                        : 'border-black'
+                }`}
+                onClick={() => handleOrderTypeChange('Delivery')}
+                onKeyDown={(event) => handleKeyDown(event, 'Delivery')}
+            >
+                <Image
+                    className=""
+                    src={
+                        'https://target.scene7.com/is/image/Target/GUEST_60573d49-ca4b-4442-8a54-2a228fe24a16'
+                    }
+                    width={20}
+                    height={20}
+                    alt={`Target Pickup Image`}
+                />
+
+                <h2 className="font-bold text-sm">Delivery</h2>
+                <p className="text-[10px] text-gray-600">
+                    Select delivery window at checkout
+                </p>
+            </div>
+
+            <div
+                tabIndex={0}
+                className={`border rounded-lg h-28 p-2 cursor-pointer ${
+                    selectedOrderType === 'Shipping'
+                        ? 'border-green-500 border-2'
+                        : 'border-black'
+                }`}
+                onClick={() => handleOrderTypeChange('Shipping')}
+                onKeyDown={(event) => handleKeyDown(event, 'Shipping')}
+            >
+                <Image
+                    className=""
+                    src={
+                        'https://corporate.target.com/_media/TargetCorp/news/2015/FreeShipping-Header-copy.jpg?width=940&height=470&ext=.jpg'
+                    }
+                    width={35}
+                    height={35}
+                    alt={`Target Pickup Image`}
+                />
+
+                <h2 className="font-bold text-sm">Shipping</h2>
+                <p className="text-[10px] text-gray-600">
+                    Get it by Tue, Jul 27
+                </p>
+            </div>
+
+            {selectedOrderType === 'Pickup' && (
+                <div className="col-span-3">
+                    <h3 className="font-bold text-sm">Pick up at Woburn</h3>
+                    <p className="text-green-800 text-xs">
+                        {' '}
+                        {`Ready within ${Math.floor(
+                            readyInMinutes / 60
+                        )} hours`}
+                        {readyInMinutes % 60 > 0 &&
+                            ` and ${readyInMinutes % 60} minutes `}
+                        <span className="text-black">for pickup in store</span>
+                    </p>
+                </div>
+            )}
+
+            {selectedOrderType === 'Delivery' && (
+                <div className="col-span-3">
+                    <p className="font-bold text-sm">Same Day Delivery</p>
+                    <p className="text-xs">
+                        to <span className="font-bold text-sm">02180 </span>
+                        from{' '}
+                        <span className="font-bold text-sm">
+                            Stoneham Redstone
+                        </span>
+                    </p>
+
+                    <p className="text-xs text-green-700">
+                        Get it as soon as 6pm today{' '}
+                        <span className="text-black">with Shipt</span>
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        Free with membership or $9.99/delivery
+                    </p>
+                </div>
+            )}
+
+            {selectedOrderType === 'Shipping' && (
+                <div className=" col-span-3">
+                    <p className="font-bold text-sm">Ship to 02180</p>
+                    <p className="text-green-700 text-xs">
+                        Get it by {getTwoDaysFromDate()}
+                    </p>
+                    <p className="text-gray-500 text-xs">
+                        Free shipping with $35 orders - Exclusions Apply.
+                    </p>
+                </div>
+            )}
+        </>
     );
 };
 

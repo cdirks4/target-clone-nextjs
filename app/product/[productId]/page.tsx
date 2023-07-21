@@ -34,27 +34,27 @@ export default async function ProductRoute({
         <main className="ml-2">
             <div className="m-2 max-w-[1000px] container mx-auto  ">
                 <div className="text-gray-500 text-[10px]  ">
-                    <Link href="/target" className="underline">
+                    <Link href="/" className="underline">
                         {' '}
-                        Target
+                        Home
                     </Link>{' '}
                     {' / '}
-                    <Link href="/school-office-supplies" className="underline">
-                        Apple
+                    <Link href="/" className="underline">
+                        {product.brand}
                     </Link>
                 </div>
 
-                <h1 className="text-lg font-bold mb-4">{product.title}</h1>
                 <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-2 h-full">
                     <ImageGallery
                         images={product.images}
                         videos={product.videos}
                     />
                     <ProductBuyBox
-                        readyInMinutes={product.readyInMinutes}
+                        title={product.title}
                         price={product.price}
                         rating={product.rating}
                         productId={product.id}
+                        readyInMinutes={product.readyInMinutes}
                     />
                     <AboutProduct
                         highlights={product.highlights}
