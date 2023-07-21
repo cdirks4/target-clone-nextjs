@@ -22,7 +22,7 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
             const cartResponse = await fetch('/api/cart', {
                 method: 'GET',
             });
-            const { products } = await cartResponse.json();
+            const products = await cartResponse.json();
             setCartProducts(products);
         };
         fetchCartProducts();
