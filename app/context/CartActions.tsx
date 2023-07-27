@@ -1,14 +1,19 @@
 'use client';
 import React, { useContext, useState } from 'react';
 import { CartContext } from './CartContext';
+import { OrderType } from '@prisma/client';
 
 interface AddToCartButtonProps {
     productId: string;
+    quantity: number;
     textSize: string;
+    orderType: OrderType;
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     productId,
+    quantity,
+    orderType,
     textSize = '10',
 }) => {
     const { addProductToCart } = useContext(CartContext);
@@ -16,7 +21,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
 
     const handleAddToCart = async () => {
         setIsAddingToCart(true);
-        await addProductToCart(productId);
+        await addProductToCart(productId, quantity, orderType);
         setIsAddingToCart(false);
     };
 
@@ -24,7 +29,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
         <div>
             <button
                 onClick={handleAddToCart}
-                className={`bg-red-700 text-white rounded text-[${textSize}px] min-h-[30px] p-1 font-bold w-full h-full`}
+                className={`bg-red-700 text-white rounded text-[${textSize}px] min-h-[30px] p-1 font-bold w-full h-full `}
                 disabled={isAddingToCart}
             >
                 <Spinner

@@ -1,10 +1,18 @@
 'use client';
 import React, { createContext, useState, useEffect } from 'react';
-import { Product } from '@prisma/client';
+import { OrderType, Product } from '@prisma/client';
 
+interface ProductWithQuantity extends Product {
+    quantity: number;
+    orderType: OrderType;
+}
 type CartContextType = {
-    cartProducts: Product[];
-    addProductToCart: (productId: string) => Promise<void>;
+    cartProducts: ProductWithQuantity[];
+    addProductToCart: (
+        productId: string,
+        quantity: number,
+        orderType: OrderType
+    ) => Promise<void>;
 };
 
 const CartContext = createContext<CartContextType>({
@@ -15,7 +23,7 @@ const CartContext = createContext<CartContextType>({
 const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [cartProducts, setCartProducts] = useState<Product[]>([]);
+    const [cartProducts, setCartProducts] = useState<ProductWithQuantity[]>([]);
 
     useEffect(() => {
         const fetchCartProducts = async () => {
@@ -23,21 +31,30 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 method: 'GET',
             });
             const products = await cartResponse.json();
-            setCartProducts(products);
+            console.log(products);
+            if (products.error) {
+                setCartProducts([]);
+            } else {
+                setCartProducts(products);
+            }
         };
         fetchCartProducts();
     }, []);
 
-    const addProductToCart = async (productId: string): Promise<void> => {
+    const addProductToCart = async (
+        productId: string,
+        quantity: number,
+        orderType: OrderType
+    ): Promise<void> => {
         try {
             const updatedCartResponse = await fetch(`/api/cart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ productId }),
+                body: JSON.stringify({ productId, quantity, orderType }),
             });
-            const { products } = await updatedCartResponse.json();
+            const products = await updatedCartResponse.json();
             setCartProducts(products);
             return;
         } catch (error) {

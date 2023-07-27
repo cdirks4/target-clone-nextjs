@@ -4,6 +4,7 @@ import Image from 'next/image';
 import RatingStars from '../../components/RatingStars';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { AddToCartButton } from '../../context/CartActions';
+import { OrderType } from '@prisma/client';
 
 interface IndividualProductProps {
     title: string;
@@ -11,6 +12,7 @@ interface IndividualProductProps {
     rating: number;
     readyInMinutes: number;
     productId: string;
+    quantity: number;
 }
 const IndividualProductDetails: FC<IndividualProductProps> = ({
     title,
@@ -18,7 +20,11 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
     rating,
     readyInMinutes,
     productId,
+    quantity,
 }) => {
+    const [selectedOrderType, setSelectedOrderType] = useState<OrderType>(
+        OrderType.PICKUP
+    );
     return (
         <div className="col-span-2">
             <h1 className="text-md font-bold mb-1">{title}</h1>
@@ -30,7 +36,11 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
             </div>
             <div className="grid gap-2 grid-cols-3  mt-2">
                 <OrderTypeComponent
-                    {...{ readyInMinutes }}
+                    {...{
+                        readyInMinutes,
+                        setSelectedOrderType,
+                        selectedOrderType,
+                    }}
                 ></OrderTypeComponent>
 
                 <select
@@ -46,6 +56,8 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
                 </select>
                 <div className="w-full h-28 col-span-2 col-start-2">
                     <AddToCartButton
+                        orderType={selectedOrderType}
+                        quantity={quantity}
                         textSize="10"
                         productId={productId}
                     ></AddToCartButton>
@@ -57,22 +69,22 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
 
 type OrderTypeProps = {
     readyInMinutes: number;
+    setSelectedOrderType: React.Dispatch<React.SetStateAction<OrderType>>;
+    selectedOrderType: OrderType;
 };
 
-const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
-    const [selectedOrderType, setSelectedOrderType] = useState<
-        'Pickup' | 'Delivery' | 'Shipping'
-    >('Pickup');
-
-    const handleOrderTypeChange = (
-        orderType: 'Pickup' | 'Delivery' | 'Shipping'
-    ) => {
+const OrderTypeComponent: FC<OrderTypeProps> = ({
+    readyInMinutes,
+    setSelectedOrderType,
+    selectedOrderType,
+}) => {
+    const handleOrderTypeChange = (orderType: OrderType) => {
         setSelectedOrderType(orderType);
     };
 
     const handleKeyDown = (
         event: React.KeyboardEvent<HTMLDivElement>,
-        orderType: 'Pickup' | 'Delivery' | 'Shipping'
+        orderType: OrderType
     ) => {
         if (event.key === 'Enter' || event.key === ' ') {
             handleOrderTypeChange(orderType);
@@ -94,12 +106,12 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
             <div
                 tabIndex={0}
                 className={`border rounded-lg h-28 p-2 cursor-pointer ${
-                    selectedOrderType === 'Pickup'
+                    selectedOrderType === OrderType.PICKUP
                         ? 'border-green-500 border-2'
                         : 'border-black'
                 }`}
-                onClick={() => handleOrderTypeChange('Pickup')}
-                onKeyDown={(event) => handleKeyDown(event, 'Pickup')}
+                onClick={() => handleOrderTypeChange(OrderType.PICKUP)}
+                onKeyDown={(event) => handleKeyDown(event, OrderType.PICKUP)}
             >
                 <Image
                     className=""
@@ -128,15 +140,14 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
             <div
                 tabIndex={0}
                 className={`border rounded-lg h-28 p-2 cursor-pointer ${
-                    selectedOrderType === 'Delivery'
+                    selectedOrderType === OrderType.DELIVERY
                         ? 'border-green-500 border-2'
                         : 'border-black'
                 }`}
-                onClick={() => handleOrderTypeChange('Delivery')}
-                onKeyDown={(event) => handleKeyDown(event, 'Delivery')}
+                onClick={() => handleOrderTypeChange(OrderType.DELIVERY)}
+                onKeyDown={(event) => handleKeyDown(event, OrderType.DELIVERY)}
             >
                 <Image
-                    className=""
                     src={
                         'https://target.scene7.com/is/image/Target/GUEST_60573d49-ca4b-4442-8a54-2a228fe24a16'
                     }
@@ -154,20 +165,20 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
             <div
                 tabIndex={0}
                 className={`border rounded-lg h-28 p-2 cursor-pointer ${
-                    selectedOrderType === 'Shipping'
+                    selectedOrderType === OrderType.SHIPPING
                         ? 'border-green-500 border-2'
                         : 'border-black'
                 }`}
-                onClick={() => handleOrderTypeChange('Shipping')}
-                onKeyDown={(event) => handleKeyDown(event, 'Shipping')}
+                onClick={() => handleOrderTypeChange(OrderType.SHIPPING)}
+                onKeyDown={(event) => handleKeyDown(event, OrderType.SHIPPING)}
             >
                 <Image
-                    className=""
                     src={
                         'https://corporate.target.com/_media/TargetCorp/news/2015/FreeShipping-Header-copy.jpg?width=940&height=470&ext=.jpg'
                     }
                     width={35}
                     height={35}
+                    className="w-auto h-auto"
                     alt={`Target Pickup Image`}
                 />
 
@@ -177,7 +188,7 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
                 </p>
             </div>
 
-            {selectedOrderType === 'Pickup' && (
+            {selectedOrderType === OrderType.PICKUP && (
                 <div className="col-span-3">
                     <h3 className="font-bold text-sm">Pick up at Woburn</h3>
                     <p className="text-green-800 text-xs">
@@ -192,7 +203,7 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
                 </div>
             )}
 
-            {selectedOrderType === 'Delivery' && (
+            {selectedOrderType === OrderType.DELIVERY && (
                 <div className="col-span-3">
                     <p className="font-bold text-sm">Same Day Delivery</p>
                     <p className="text-xs">
@@ -213,7 +224,7 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
                 </div>
             )}
 
-            {selectedOrderType === 'Shipping' && (
+            {selectedOrderType === OrderType.SHIPPING && (
                 <div className=" col-span-3">
                     <p className="font-bold text-sm">Ship to 02180</p>
                     <p className="text-green-700 text-xs">

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import prisma from '../../../lib/prisma';
-import { Collection, Product } from '@prisma/client';
+import { Collection, Product, OrderType } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import RatingStars from '../../components/RatingStars';
@@ -55,6 +55,8 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                 <p className="text-[9px] mb-4">When purchased online</p>
                 <div className="sm:w-[80px] w-14">
                     <AddToCartButton
+                        orderType={OrderType.PICKUP}
+                        quantity={1}
                         textSize="8"
                         productId={product.id}
                     ></AddToCartButton>

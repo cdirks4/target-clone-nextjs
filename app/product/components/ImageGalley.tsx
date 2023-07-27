@@ -8,7 +8,6 @@ interface ImageGalleryProps {
 }
 
 const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
-    const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(-1);
     const maxImagesToShow = 4;
     const [mainImage, setMainImage] = useState<string>(images[0]);
 
@@ -25,6 +24,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                 }`}
             >
                 <Image
+                    priority
                     key={`top-images-${index}-${image}`}
                     src={image}
                     alt={`Image ${index + 1}`}
@@ -58,7 +58,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             quality={100}
                             width={300}
                             height={300}
-                            className="w-full h-full object-cover cursor-pointer"
+                            className="w-auto h-auto object-cover cursor-pointer"
                         />
                         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                             <span className="text-white text-xs">
@@ -69,14 +69,17 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                 );
             } else if (index === 2 && videos[0]) {
                 renderedImages.push(
-                    <div className="h-full w-full relative">
+                    <div
+                        className="h-full w-full relative"
+                        key={`video-player-${index}`}
+                    >
                         <VideoPlayer videoUrl={videos[0]} />
                     </div>
                 );
             } else {
                 renderedImages.push(
                     <div
-                        key={`bottom-images-div-${index}`}
+                        key={`bottom-images-below-video-${index}`}
                         className={`h-full w-full  ${
                             image === mainImage && 'border'
                         }`}
@@ -89,7 +92,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             quality={100}
                             width={500}
                             height={500}
-                            className="w-full h-full object-cover cursor-pointer"
+                            className="w-auto h-auto object-cover cursor-pointer"
                         />
                     </div>
                 );

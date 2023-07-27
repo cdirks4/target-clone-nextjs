@@ -14,7 +14,7 @@ const SearchBar: FC = () => {
         <div className="relative bg-white w-full h-16 flex items-center justify-around shadow-lg ">
             <Link
                 href="/"
-                className="w-10 h-10 flex items-center justify-center hover:border hover:border-dashed hover:border-gray-500 hover:cursor-pointer"
+                className="w-10 h-10 flex items-center justify-center hover:border hover:border-dashed hover:border-gray-500 hover:cursor-pointer hover:rounded-full"
             >
                 <img
                     width="32"
@@ -30,10 +30,10 @@ const SearchBar: FC = () => {
             ></div>
             <div>
                 {!isSignedIn ? (
-                    <Link href="/sign-in" className="flex  text-center">
+                    <Link href="/sign-up" className="flex  text-center">
                         <UserCircleIcon className="h-6 w-6 text-gray-500" />
                         <p className="text-gray-500 text-xs  ml-[3px] mt-[3px]">
-                            Sign In
+                            Sign Up
                         </p>
                     </Link>
                 ) : (

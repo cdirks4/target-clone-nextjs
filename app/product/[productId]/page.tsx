@@ -50,6 +50,7 @@ export default async function ProductRoute({
                         videos={product.videos}
                     />
                     <ProductBuyBox
+                        quantity={1}
                         title={product.title}
                         price={product.price}
                         rating={product.rating}
