@@ -12,7 +12,7 @@ type CartContextType = {
         productId: string,
         quantity: number,
         orderType: OrderType
-    ) => Promise<void>;
+    ) => Promise<void | string>;
 };
 
 const CartContext = createContext<CartContextType>({
@@ -45,7 +45,7 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         productId: string,
         quantity: number,
         orderType: OrderType
-    ): Promise<void> => {
+    ): Promise<string | void> => {
         try {
             const updatedCartResponse = await fetch(`/api/cart`, {
                 method: 'POST',
@@ -55,6 +55,9 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 body: JSON.stringify({ productId, quantity, orderType }),
             });
             const products = await updatedCartResponse.json();
+            if (products.error) {
+                return 'Please sign in';
+            }
             setCartProducts(products);
             return;
         } catch (error) {

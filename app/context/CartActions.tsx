@@ -18,10 +18,14 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
 }) => {
     const { addProductToCart } = useContext(CartContext);
     const [isAddingToCart, setIsAddingToCart] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null); // Add state to hold the error message
 
     const handleAddToCart = async () => {
         setIsAddingToCart(true);
-        await addProductToCart(productId, quantity, orderType);
+        const check = await addProductToCart(productId, quantity, orderType);
+        if (check) {
+            setErrorMessage(check);
+        }
         setIsAddingToCart(false);
     };
 
@@ -38,6 +42,9 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
                     buttonText="Add to Cart"
                 />
             </button>
+            {errorMessage && ( // Display the error message if it exists
+                <p className="text-red-700 text-[8px]">{errorMessage}</p>
+            )}
         </div>
     );
 };
