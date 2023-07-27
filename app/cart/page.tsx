@@ -29,10 +29,12 @@ export default function CartPage() {
             <h1 className="font-bold text-2xl">Cart</h1>
             <h2 className="font-bold text-gray-500">
                 $
-                {cartProducts?.reduce(
-                    (accumulator, product) => accumulator + product.price,
-                    0
-                )}{' '}
+                {cartProducts
+                    ?.reduce(
+                        (accumulator, product) => accumulator + product.price,
+                        0
+                    )
+                    .toFixed(2)}{' '}
                 subtotal · {cartProducts.length} item(s)
             </h2>
             {pickupProducts.length > 0 && (
