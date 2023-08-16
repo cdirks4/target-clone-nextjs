@@ -42,25 +42,29 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
                         selectedOrderType,
                     }}
                 ></OrderTypeComponent>
-
-                <select
-                    className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1 h-8"
-                    value={`Qty }`}
-                    onChange={() => {}}
-                >
-                    {Array.from(Array(10).keys()).map((value) => (
-                        <option key={`Qty ${value}`} value={`Qty ${value + 1}`}>
-                            Qty {value + 1}
-                        </option>
-                    ))}
-                </select>
-                <div className="w-full h-28 col-span-2 col-start-2">
-                    <AddToCartButton
-                        orderType={selectedOrderType}
-                        quantity={quantity}
-                        textSize="10"
-                        productId={productId}
-                    ></AddToCartButton>
+                <div className="w-full grid gap-2 grid-cols-3 col-span-3 max-h-28">
+                    <select
+                        className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1 h-8"
+                        value={`Qty }`}
+                        onChange={() => {}}
+                    >
+                        {Array.from(Array(10).keys()).map((value) => (
+                            <option
+                                key={`Qty ${value}`}
+                                value={`Qty ${value + 1}`}
+                            >
+                                Qty {value + 1}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="w-full h-28 col-span-2 col-start-2">
+                        <AddToCartButton
+                            orderType={selectedOrderType}
+                            quantity={quantity}
+                            textSize="10"
+                            productId={productId}
+                        ></AddToCartButton>
+                    </div>
                 </div>
             </div>
         </div>

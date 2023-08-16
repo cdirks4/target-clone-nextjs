@@ -44,7 +44,7 @@ export default async function ProductRoute({
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-2 h-full">
+                <div className="grid grid-cols-1 sm:grid-rows-3 sm:grid-cols-5 gap-2 h-full">
                     <ImageGallery
                         images={product.images}
                         videos={product.videos}
