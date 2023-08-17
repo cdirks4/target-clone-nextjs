@@ -11,7 +11,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
     const maxImagesToShow = 4;
     const [mainImage, setMainImage] = useState<string>(images[0]);
 
-    const handleClick = (image: string) => {
+    const handleSelectImage = (image: string) => {
         setMainImage(image);
     };
 
@@ -31,6 +31,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                     quality={100}
                     width={400}
                     height={400}
+                    tabIndex={image === mainImage ? 0 : -1}
                 />
             </div>
         ));
@@ -59,6 +60,12 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             width={300}
                             height={300}
                             className="w-auto h-auto object-cover cursor-pointer"
+                            onClick={() => handleSelectImage(image)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSelectImage(image);
+                                }
+                            }}
                         />
                         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                             <span className="text-white text-xs">
@@ -83,7 +90,12 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                         className={`h-full w-full  ${
                             image === mainImage && 'border'
                         }`}
-                        onClick={() => handleClick(image)}
+                        onClick={() => handleSelectImage(image)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                setMainImage(image);
+                            }
+                        }}
                     >
                         <Image
                             src={image}
@@ -92,6 +104,7 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, videos }) => {
                             quality={100}
                             width={500}
                             height={500}
+                            tabIndex={0}
                             className="w-auto h-auto object-cover cursor-pointer"
                         />
                     </div>
