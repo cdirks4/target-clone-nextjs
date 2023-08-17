@@ -1,35 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Target Clone - Next.js E-Commerce App
 
-## Getting Started
+Welcome to my Next.js project, a fully-functional e-commerce application inspired by Target's online shopping experience. This project showcases my proficiency in web development using cutting-edge technologies such as Next.js, Prisma, and Tailwind CSS. With a focus on user experience, this app allows users to explore products across three categories, sign in to their accounts, manage their shopping carts, and enjoy a seamless shopping journey.
 
-First, run the development server:
+## Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Browse Products:** Users can effortlessly explore a wide range of products categorized into three main sections.
+- **Secure User Authentication:** Seamless sign-in process using authentication powered by Next.js and Clerk.
+- **Interactive Cart Management:** Add, remove, and update products within the cart for a dynamic shopping experience.
+- **Modern UI with Tailwind CSS:** A sleek and responsive user interface designed using Tailwind CSS.
+- **Prisma Database Integration:** Data is managed efficiently using Prisma ORM, ensuring a smooth data flow.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## User Session Management
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clerk is employed to enhance user experience by efficiently managing user sessions and authentication. This feature ensures secure and smooth interactions throughout the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
 
-## Learn More
+- **Next.js:** A React framework for building dynamic and server-rendered applications.
+- **Prisma:** An ORM tool that simplifies database interactions and management.
+- **Tailwind CSS:** A utility-first CSS framework for designing modern and responsive user interfaces.
+- **Clerk:** A tool for managing user authentication and sessions.
 
-To learn more about Next.js, take a look at the following resources:
+## Live Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Check out the [live demo](https://temp-7yhqojqss-cdirks4-mecom.vercel.app/) to experience the app in action.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## GitHub Repository
 
-## Deploy on Vercel
+Visit the [GitHub repository](https://github.com/cdirks4/target-clone-nextjs) 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# temp
