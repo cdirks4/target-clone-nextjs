@@ -1,18 +1,11 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { CartContext } from '../context/CartContext';
 import { OrderType, Product } from '@prisma/client';
 
 export default function CartPage() {
     const { cartProducts } = useContext(CartContext);
-
-    const handleQuantityChange = (
-        event: React.ChangeEvent<HTMLSelectElement>,
-        productId: string
-    ) => {
-        const newQuantity = parseInt(event.target.value);
-    };
 
     const filterProductsByOrderType = (orderType: OrderType) => {
         return cartProducts.filter(
@@ -40,22 +33,22 @@ export default function CartPage() {
             {pickupProducts.length > 0 && (
                 <OrderCheckoutSection
                     orderTitle="Order Pickup"
+                    orderCheckoutTitle="Order Pickup"
                     checkoutItems={pickupProducts}
-                    handleQuantityChange={handleQuantityChange}
                 />
             )}
             {deliveryProducts.length > 0 && (
                 <OrderCheckoutSection
                     orderTitle="Delivery"
+                    orderCheckoutTitle="Order Delivery"
                     checkoutItems={deliveryProducts}
-                    handleQuantityChange={handleQuantityChange}
                 />
             )}{' '}
             {shippingProducts.length > 0 && (
                 <OrderCheckoutSection
                     orderTitle="Shipping"
+                    orderCheckoutTitle="Order Shipping"
                     checkoutItems={shippingProducts}
-                    handleQuantityChange={handleQuantityChange}
                 />
             )}
         </div>
@@ -69,17 +62,14 @@ interface ProductWithQuantity extends Product {
 
 interface OrderPickupSectionProps {
     orderTitle: string;
+    orderCheckoutTitle: string;
     checkoutItems: ProductWithQuantity[];
-    handleQuantityChange: (
-        event: React.ChangeEvent<HTMLSelectElement>,
-        productId: string
-    ) => void;
 }
 
 const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
     orderTitle,
     checkoutItems,
-    handleQuantityChange,
+    orderCheckoutTitle,
 }) => {
     return (
         <div className="shadow overflow-hidden sm:rounded-lg mt-4">
@@ -99,41 +89,10 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
                 </div>
             </div>
             {checkoutItems.map((product, index) => (
-                <div
-                    className="flex border-b ml-2 mr-2"
-                    key={`product-cover-art-${index}`}
-                >
-                    <Image
-                        className="rounded-full m-2"
-                        key={`product-cover-art-${index}`}
-                        src={product.images[0]}
-                        alt={`Image ${index + 1}`}
-                        width={80}
-                        height={80}
-                    />
-                    <div className="mt-2 max-w-xs">
-                        <h2 className="text-xs text-gray-500">
-                            {product.title}
-                        </h2>
-                        <select
-                            className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1"
-                            value={`Qty ${product.quantity}`}
-                            onChange={(event) =>
-                                handleQuantityChange(event, product.id)
-                            }
-                        >
-                            {Array.from(Array(10).keys()).map((value) => (
-                                <option
-                                    key={`Qty ${value}`}
-                                    value={`Qty ${value + 1}`}
-                                >
-                                    Qty {value + 1}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <h2 className="text-xs text-gray-800">${product.price}</h2>
-                </div>
+                <CheckoutItem
+                    key={`product-checkout-item-${product.id}`}
+                    product={product}
+                />
             ))}
 
             <div className="flex ml-2 mt-2 mb-2 justify-between">
@@ -141,11 +100,147 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
                     <h3 className="font-bold text-xs ">
                         {checkoutItems.length} item(s)
                     </h3>
-                    <p className="text-xs text-gray-500">Order Pickup</p>
+                    <p className="text-xs text-gray-500">
+                        {orderCheckoutTitle}
+                    </p>
                 </div>
-                <button className="bg-red-700 text-white rounded min-h-[30px] w-[200px] font-bold w-full h-full text-xs ">
-                    Checkout Order Pickup item
+                <button className="bg-red-700 text-white rounded min-h-[30px] max-w-[25%] font-bold w-full h-full text-xs mr-2">
+                    Checkout {orderCheckoutTitle} item
                 </button>
+            </div>
+        </div>
+    );
+};
+
+interface CheckoutItemProps {
+    product: ProductWithQuantity;
+}
+
+const CheckoutItem: React.FC<CheckoutItemProps> = ({ product }) => {
+    const { addProductToCart } = useContext(CartContext);
+    const handleUpdatingProduct = async (
+        event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+        productId: string,
+        orderType: OrderType
+    ) => {
+        if (event.target.type === 'radio') {
+            await addProductToCart(productId, product.quantity, orderType);
+        } else {
+            const newQuantity = parseInt(event.target.value, 10);
+            await addProductToCart(productId, newQuantity, orderType);
+        }
+    };
+    const getTwoDaysFromDate = () => {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 2);
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+        };
+        return currentDate.toLocaleDateString('en-US', options);
+    };
+    return (
+        <div
+            className="relative border-b ml-2  mr-4 flex"
+            key={`product-cover-art-${product.id}`}
+        >
+            <div className="flex m-2 min-w-full">
+                <Image
+                    alt="primary-product-photo"
+                    className="rounded-full "
+                    src={product.images[0]}
+                    width={80}
+                    height={80}
+                />
+                <div className="w-[40%]">
+                    <h2 className="text-xs  w-[94%] ">{product.title}</h2>
+                    <select
+                        key={`select-${product.id}`}
+                        className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1 mt-2 mb-2"
+                        defaultValue={product.quantity}
+                        onChange={(event) =>
+                            handleUpdatingProduct(
+                                event,
+                                product.id,
+                                product.orderType
+                            )
+                        }
+                    >
+                        {Array.from(Array(10).keys()).map((value) => (
+                            <option key={`Qty ${value + 1}`} value={value + 1}>
+                                Qty {value + 1}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="grid">
+                    <label
+                        className="inline-flex items-center mr-2 cursor-pointer"
+                        htmlFor={`radio-pickup-${product.id}`}
+                    >
+                        <span className=" mr-2 flex justify-center items-center">
+                            <input
+                                id={`radio-pickup-${product.id}`}
+                                type="radio"
+                                name={`radio-${product.id}`}
+                                defaultChecked={
+                                    product.orderType === OrderType.SHIPPING
+                                }
+                                value={OrderType.SHIPPING}
+                                className="absolute"
+                                onChange={(event) =>
+                                    handleUpdatingProduct(
+                                        event,
+                                        product.id,
+                                        event.target.value as OrderType
+                                    )
+                                }
+                            />
+                        </span>
+                        <span className="text-xs ">
+                            Standard Shipping
+                            <p className="text-green-700 text-[10px]">
+                                Get it by {getTwoDaysFromDate()}
+                            </p>
+                        </span>
+                    </label>
+                    <label
+                        className="inline-flex items-center mr-2 cursor-pointer"
+                        htmlFor={`radio-shipping-${product.id}`}
+                    >
+                        <span className="mr-2 flex flex-shrink-0 justify-center items-center">
+                            <input
+                                id={`radio-shipping-${product.id}`}
+                                type="radio"
+                                name={`radio-${product.id}`}
+                                defaultChecked={
+                                    product.orderType === OrderType.PICKUP
+                                }
+                                value={OrderType.PICKUP}
+                                className="absolute"
+                                onChange={(event) =>
+                                    handleUpdatingProduct(
+                                        event,
+                                        product.id,
+                                        event.target.value as OrderType
+                                    )
+                                }
+                            />
+                        </span>
+                        <span className="text-xs ">
+                            Order Pickup{' '}
+                            <p className="text-green-700 text-[10px]">
+                                Ready tomorrow
+                            </p>
+                        </span>
+                    </label>
+                </div>
+                <div className="flex-grow"></div>{' '}
+                <h2 className="mt-2 text-xs text-gray-800 font-bold">
+                    ${product.price}
+                </h2>
+                <h2 className="ml-4 mr-2 font-extralight">X</h2>
             </div>
         </div>
     );
