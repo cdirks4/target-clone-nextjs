@@ -45,7 +45,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                     />
                 </Link>
             </div>
-            <div className="m-4 ">
+            <div className="m-4 place-self-end">
                 <h3 className="max-w-[200px] text-xs text-wrap bg-white break-words font-bold ">
                     {product.title}
                 </h3>
@@ -53,7 +53,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                 <RatingStars rating={product.rating} />
                 <p className="text-xs">${product.price}</p>
                 <p className="text-[9px] mb-4">When purchased online</p>
-                <div className="sm:w-[80px] w-14">
+                <div className="sm:w-[80px] w-14 ">
                     <AddToCartButton
                         orderType={OrderType.PICKUP}
                         quantity={1}
