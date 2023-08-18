@@ -24,7 +24,16 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
             handleOrderTypeChange(orderType);
         }
     };
-
+    const getTwoDaysFromDate = () => {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 2);
+        const options: Intl.DateTimeFormatOptions = {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+        };
+        return currentDate.toLocaleDateString('en-US', options);
+    };
     return (
         <>
             <div
@@ -107,7 +116,7 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({ readyInMinutes }) => {
 
                 <h2 className="font-bold text-sm">Shipping</h2>
                 <p className="text-[10px] text-gray-600">
-                    Get it by Tue, Jul 27
+                    Get it {getTwoDaysFromDate()}
                 </p>
             </div>
             <div className="cols-span-3"></div>

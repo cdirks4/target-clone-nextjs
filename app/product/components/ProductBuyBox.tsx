@@ -20,11 +20,11 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
     rating,
     readyInMinutes,
     productId,
-    quantity,
 }) => {
     const [selectedOrderType, setSelectedOrderType] = useState<OrderType>(
         OrderType.PICKUP
     );
+    const [currentQuantity, setCurrentQuantity] = useState(1);
     return (
         <div className="col-span-2">
             <h1 className="text-md font-bold mb-1">{title}</h1>
@@ -45,14 +45,13 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
                 <div className="w-full grid gap-2 grid-cols-3 col-span-3 max-h-28">
                     <select
                         className="border-gray-500 text-gray-600 rounded-sm border cursor-pointer text-[10px] p-1 h-8"
-                        value={`Qty }`}
-                        onChange={() => {}}
+                        value={currentQuantity}
+                        onChange={(e) => {
+                            setCurrentQuantity(Number(e.target.value));
+                        }}
                     >
                         {Array.from(Array(10).keys()).map((value) => (
-                            <option
-                                key={`Qty ${value}`}
-                                value={`Qty ${value + 1}`}
-                            >
+                            <option key={`Qty ${value + 1}`} value={value + 1}>
                                 Qty {value + 1}
                             </option>
                         ))}
@@ -60,7 +59,7 @@ const IndividualProductDetails: FC<IndividualProductProps> = ({
                     <div className="w-full h-28 col-span-2 col-start-2">
                         <AddToCartButton
                             orderType={selectedOrderType}
-                            quantity={quantity}
+                            quantity={currentQuantity}
                             textSize="10"
                             productId={productId}
                         ></AddToCartButton>
@@ -188,7 +187,7 @@ const OrderTypeComponent: FC<OrderTypeProps> = ({
 
                 <h2 className="font-bold text-sm">Shipping</h2>
                 <p className="text-[10px] text-gray-600">
-                    Get it by Tue, Jul 27
+                    Get it {getTwoDaysFromDate()}
                 </p>
             </div>
 
