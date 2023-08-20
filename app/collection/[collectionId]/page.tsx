@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React from 'react';
+
 import prisma from '../../../lib/prisma';
 import { Collection, Product, OrderType } from '@prisma/client';
 import Image from 'next/image';
@@ -35,24 +36,27 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
             key={`product-card-${product.tcin}`}
             className=" bg-white  grid rows-2 "
         >
-            <div className="flex justify-center">
-                <Link href={`/product/${product.id}`}>
+            <Link href={`/product/${product.id}`}>
+                <div className="flex justify-center">
                     <Image
                         src={product.images[0]}
                         alt={product.title}
                         height={150}
                         width={150}
                     />
-                </Link>
-            </div>
+                </div>
+            </Link>
             <div className="m-4 place-self-end">
-                <h3 className="max-w-[200px] text-xs text-wrap bg-white break-words font-bold ">
-                    {product.title}
-                </h3>
-                <p className="text-[9px]">{product.brand}</p>
-                <RatingStars rating={product.rating} />
-                <p className="text-xs">${product.price}</p>
-                <p className="text-[9px] mb-4">When purchased online</p>
+                <Link href={`/product/${product.id}`}>
+                    <h3 className="max-w-[200px] text-xs text-wrap bg-white break-words font-bold ">
+                        {product.title}
+                    </h3>
+
+                    <p className="text-[9px]">{product.brand}</p>
+                    <RatingStars rating={product.rating} />
+                    <p className="text-xs">${product.price}</p>
+                    <p className="text-[9px] mb-4">When purchased online</p>
+                </Link>
                 <div className="sm:w-[80px] w-14 ">
                     <AddToCartButton
                         orderType={OrderType.PICKUP}
