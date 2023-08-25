@@ -3,7 +3,7 @@ import React, { useContext, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { CartContext } from '../context/CartContext';
 import { OrderType, Product } from '@prisma/client';
-
+import Link from 'next/link';
 export default function CartPage() {
     const { cartProducts } = useContext(CartContext);
 
@@ -105,7 +105,9 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
                     </p>
                 </div>
                 <button className="bg-red-700 text-white rounded min-h-[30px] max-w-[25%] font-bold w-full h-full text-xs mr-2">
-                    Checkout {orderCheckoutTitle} item
+                    <Link href="/checkout">
+                        Checkout {orderCheckoutTitle} item
+                    </Link>
                 </button>
             </div>
         </div>
