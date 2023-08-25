@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from 'next/server';
 import { getAuth } from '@clerk/nextjs/server';
 import prisma from '../../../lib/prisma';
 import Stripe from 'stripe';
-import { redirect } from 'next/navigation';
 
 export async function POST(request: NextRequest) {
     console.log('hitting');
@@ -46,8 +45,8 @@ export async function POST(request: NextRequest) {
             },
         ],
         mode: 'payment',
-        success_url: 'https://temp-omega-eight.vercel.app/success',
-        cancel_url: 'https://temp-omega-eight.vercel.app/cancel',
+        success_url: 'https://temp-omega-eight.vercel.app/',
+        cancel_url: 'https://temp-omega-eight.vercel.app/checkout',
     });
     return NextResponse.json({ url: session.url });
 }
