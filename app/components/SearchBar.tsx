@@ -47,7 +47,13 @@ const SearchBar: FC = () => {
                 {cartProducts?.length > 0 && (
                     <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
                         <div className="flex items-center justify-center w-4 h-4 bg-red-600 rounded-full text-white">
-                            <p className="text-[8px]">{cartProducts.length}</p>
+                            <p className="text-[8px]">
+                                {cartProducts.reduce(
+                                    (total, product) =>
+                                        total + product.quantity,
+                                    0
+                                )}
+                            </p>
                         </div>
                     </div>
                 )}

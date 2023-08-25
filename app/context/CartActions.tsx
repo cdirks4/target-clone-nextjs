@@ -5,7 +5,7 @@ import { OrderType } from '@prisma/client';
 
 interface AddToCartButtonProps {
     productId: string;
-    quantity: number;
+    quantity: number | null;
     textSize: string;
     orderType: OrderType;
 }
@@ -17,15 +17,35 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     textSize = '10',
 }) => {
     const { addProductToCart } = useContext(CartContext);
+    const { cartProducts } = useContext(CartContext);
     const [isAddingToCart, setIsAddingToCart] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Add state to hold the error message
 
     const handleAddToCart = async () => {
+        let updatedQuantity;
+
+        if (quantity === null) {
+            const existingProduct = cartProducts.find(
+                (product) => product.id === productId
+            );
+            updatedQuantity = existingProduct
+                ? existingProduct.quantity + 1
+                : 1;
+        } else {
+            updatedQuantity = quantity;
+        }
+
         setIsAddingToCart(true);
-        const check = await addProductToCart(productId, quantity, orderType);
+        const check = await addProductToCart(
+            productId,
+            updatedQuantity,
+            orderType
+        );
+
         if (check) {
             setErrorMessage(check);
         }
+
         setIsAddingToCart(false);
     };
 

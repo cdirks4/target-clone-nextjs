@@ -60,7 +60,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                 <div className="sm:w-[80px] w-14 ">
                     <AddToCartButton
                         orderType={OrderType.PICKUP}
-                        quantity={1}
+                        quantity={null}
                         textSize="8"
                         productId={product.id}
                     ></AddToCartButton>

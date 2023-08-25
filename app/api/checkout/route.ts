@@ -2,9 +2,13 @@ import { NextResponse, NextRequest } from 'next/server';
 import { getAuth } from '@clerk/nextjs/server';
 import prisma from '../../../lib/prisma';
 import Stripe from 'stripe';
+import { OrderType, Product } from '@prisma/client';
 
+interface ProductWithQuantity extends Product {
+    quantity: number;
+    orderType: OrderType;
+}
 export async function POST(request: NextRequest) {
-    console.log('hitting');
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
         apiVersion: '2023-08-16',
     });
@@ -31,19 +35,18 @@ export async function POST(request: NextRequest) {
         });
     }
     const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
+        line_items: cartProducts.map((product: ProductWithQuantity) => {
+            return {
                 price_data: {
                     currency: 'usd',
-
                     product_data: {
                         name: product.title,
                     },
-                    unit_amount: 100,
+                    unit_amount: Math.round(product.price * 100),
                 },
-                quantity: 1,
-            },
-        ],
+                quantity: product.quantity,
+            };
+        }),
         mode: 'payment',
         success_url: 'https://temp-omega-eight.vercel.app/',
         cancel_url: 'https://temp-omega-eight.vercel.app/checkout',
