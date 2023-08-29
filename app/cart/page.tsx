@@ -119,7 +119,7 @@ interface CheckoutItemProps {
 }
 
 const CheckoutItem: React.FC<CheckoutItemProps> = ({ product }) => {
-    const { addProductToCart } = useContext(CartContext);
+    const { addProductToCart, removeProductFromCart } = useContext(CartContext);
     const handleUpdatingProduct = async (
         event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
         productId: string,
@@ -242,7 +242,12 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ product }) => {
                 <h2 className="mt-2 text-xs text-gray-800 font-bold">
                     ${product.price}
                 </h2>
-                <h2 className="ml-4 mr-2 font-extralight">X</h2>
+                <button
+                    className="ml-4 mr-2 font-extralight h-6"
+                    onClick={() => removeProductFromCart(product.id)}
+                >
+                    X
+                </button>
             </div>
         </div>
     );

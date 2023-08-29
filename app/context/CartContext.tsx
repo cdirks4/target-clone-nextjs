@@ -13,11 +13,13 @@ type CartContextType = {
         quantity: number,
         orderType: OrderType
     ) => Promise<void | string>;
+    removeProductFromCart: (productId: string) => Promise<void | string>;
 };
 
 const CartContext = createContext<CartContextType>({
     cartProducts: [],
     addProductToCart: () => Promise.resolve(),
+    removeProductFromCart: () => Promise.resolve(),
 });
 
 const CartProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -31,7 +33,6 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
                 method: 'GET',
             });
             const products = await cartResponse.json();
-            console.log(products);
             if (products.error) {
                 setCartProducts([]);
             } else {
@@ -68,8 +69,28 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         }
     };
 
+    const removeProductFromCart = async (productId: string) => {
+        try {
+            const updatedCartResponse = await fetch(`/api/cart/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const products = await updatedCartResponse.json();
+            if (products.error) {
+                return 'Please sign in';
+            }
+            setCartProducts(products);
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
-        <CartContext.Provider value={{ cartProducts, addProductToCart }}>
+        <CartContext.Provider
+            value={{ cartProducts, addProductToCart, removeProductFromCart }}
+        >
             {children}
         </CartContext.Provider>
     );
