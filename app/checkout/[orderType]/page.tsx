@@ -35,6 +35,16 @@ export default function CartPage({ params }: PageProps) {
             push(url);
         } catch (error) {}
     };
+    const filteredByOrderProducts =
+        //@ts-ignore
+        cartProducts.filter((prod) => prod.orderType === orderType);
+    //@ts-ignore
+    const filterProductsTotal = filteredByOrderProducts
+        .reduce((accumulator, product) => accumulator + product.price, 0)
+        .toFixed(2);
+    //@ts-ignore
+    const taxAmount = filterProductsTotal * 0.0625;
+
     return (
         <div className="m-4  justify-center flex gap-2">
             <div className="w-[425px]">
@@ -44,15 +54,7 @@ export default function CartPage({ params }: PageProps) {
                         <div>
                             <h1 className="font-bold mt-2">Cart</h1>
                             <p className="text-gray-500 text-xs">
-                                $
-                                {cartProducts
-                                    ?.reduce(
-                                        (accumulator, product) =>
-                                            accumulator + product.price,
-                                        0
-                                    )
-                                    .toFixed(2)}{' '}
-                                total ·
+                                ${filterProductsTotal} total ·
                             </p>
                         </div>
                     </div>
@@ -63,17 +65,15 @@ export default function CartPage({ params }: PageProps) {
                         </h2>
                         <h3 className="text-xs text-gray-500">at Woburn</h3>
                         <div className="flex flex-wrap ">
-                            {cartProducts
-                                .filter((prod) => prod.orderType === orderType)
-                                .map((prod) => (
-                                    <Image
-                                        key={`checkout-item-${prod.title}-${prod.id}`}
-                                        src={prod.images[0]}
-                                        height={50}
-                                        width={50}
-                                        alt={`${prod.title} checkout image`}
-                                    ></Image>
-                                ))}
+                            {filteredByOrderProducts.map((prod) => (
+                                <Image
+                                    key={`checkout-item-${prod.title}-${prod.id}`}
+                                    src={prod.images[0]}
+                                    height={50}
+                                    width={50}
+                                    alt={`${prod.title} checkout image`}
+                                ></Image>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -106,14 +106,7 @@ export default function CartPage({ params }: PageProps) {
                         Subtotal {cartProducts.length} item(s)
                     </h2>
                     <h2 className="text-gray-700 text-xs">
-                        $
-                        {cartProducts
-                            ?.reduce(
-                                (accumulator, product) =>
-                                    accumulator + product.price,
-                                0
-                            )
-                            .toFixed(2)}
+                        ${filterProductsTotal}
                     </h2>
                 </div>
                 <div className="border-b border-slate-300 ml-4 mr-4">
@@ -132,31 +125,14 @@ export default function CartPage({ params }: PageProps) {
                             Estimated Taxes
                         </h2>
                         <h2 className="text-gray-700 text-xs ">
-                            $
-                            {
-                                //@ts-ignore
-                                cartProducts
-                                    ?.reduce(
-                                        (accumulator, product) =>
-                                            accumulator + product.price,
-                                        0
-                                    )
-                                    .toFixed(2) * 0.0625
-                            }
+                            ${taxAmount.toFixed(2)}
                         </h2>
                     </div>
                 </div>
                 <div className="border-b border-slate-300  flex justify-between m-4">
                     <h2 className="font-bold mb-4 text-gray-800">Total</h2>
                     <h2 className="font-bold text-gray-800">
-                        $
-                        {cartProducts
-                            ?.reduce(
-                                (accumulator, product) =>
-                                    accumulator + product.price,
-                                0
-                            )
-                            .toFixed(2)}
+                        ${filterProductsTotal}
                     </h2>
                 </div>
                 <div className="m-4">
