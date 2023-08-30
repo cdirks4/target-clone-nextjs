@@ -1,9 +1,9 @@
 'use client';
-import React, { useContext, useState, ChangeEvent } from 'react';
+import React, { useContext, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { CartContext } from '../context/CartContext';
 import { OrderType, Product } from '@prisma/client';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 export default function CartPage() {
     const { cartProducts } = useContext(CartContext);
 
@@ -71,6 +71,7 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
     checkoutItems,
     orderCheckoutTitle,
 }) => {
+    const { push } = useRouter();
     return (
         <div className="shadow overflow-hidden sm:rounded-lg mt-4">
             <div className="flex w-max-full border-slate-300 border-b ml-4 mr-4">
@@ -104,10 +105,11 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
                         {orderCheckoutTitle}
                     </p>
                 </div>
-                <button className="bg-red-700 text-white rounded min-h-[30px] max-w-[25%] font-bold w-full h-full text-xs mr-2">
-                    <Link href="/checkout">
-                        Checkout {orderCheckoutTitle} item
-                    </Link>
+                <button
+                    className="bg-red-700 text-white rounded min-h-[30px] max-w-[25%] font-bold w-full h-full text-xs mr-2"
+                    onClick={() => push('/checkout')}
+                >
+                    Checkout {orderCheckoutTitle} item
                 </button>
             </div>
         </div>
