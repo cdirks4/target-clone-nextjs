@@ -32,6 +32,7 @@ export default function CartPage() {
             </h2>
             {pickupProducts.length > 0 && (
                 <OrderCheckoutSection
+                    orderType={OrderType.PICKUP}
                     orderTitle="Order Pickup"
                     orderCheckoutTitle="Order Pickup"
                     checkoutItems={pickupProducts}
@@ -39,6 +40,7 @@ export default function CartPage() {
             )}
             {deliveryProducts.length > 0 && (
                 <OrderCheckoutSection
+                    orderType={OrderType.DELIVERY}
                     orderTitle="Delivery"
                     orderCheckoutTitle="Order Delivery"
                     checkoutItems={deliveryProducts}
@@ -46,6 +48,7 @@ export default function CartPage() {
             )}{' '}
             {shippingProducts.length > 0 && (
                 <OrderCheckoutSection
+                    orderType={OrderType.SHIPPING}
                     orderTitle="Shipping"
                     orderCheckoutTitle="Order Shipping"
                     checkoutItems={shippingProducts}
@@ -60,13 +63,15 @@ interface ProductWithQuantity extends Product {
     quantity: number;
 }
 
-interface OrderPickupSectionProps {
+interface OrderCheckoutSectionProps {
+    orderType: OrderType;
     orderTitle: string;
     orderCheckoutTitle: string;
     checkoutItems: ProductWithQuantity[];
 }
 
-const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
+const OrderCheckoutSection: React.FC<OrderCheckoutSectionProps> = ({
+    orderType,
     orderTitle,
     checkoutItems,
     orderCheckoutTitle,
@@ -107,7 +112,7 @@ const OrderCheckoutSection: React.FC<OrderPickupSectionProps> = ({
                 </div>
                 <button
                     className="bg-red-700 text-white rounded min-h-[30px] max-w-[25%] font-bold w-full h-full text-xs mr-2"
-                    onClick={() => push('/checkout')}
+                    onClick={() => push(`/checkout/${orderType}`)}
                 >
                     Checkout {orderCheckoutTitle} item
                 </button>
