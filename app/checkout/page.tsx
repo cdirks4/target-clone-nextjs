@@ -6,10 +6,11 @@ import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 import recieptPNG from '.././images/—Pngtree—vector receipt icon_3783276.png';
 import creditCardPNG from '.././images/pngegg.png';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 export default function CartPage() {
     const { cartProducts } = useContext(CartContext);
     const { push } = useRouter();
-
+    const { user } = useUser();
     const attemptStripePayment = async () => {
         try {
             const response = await fetch('/api/checkout', {
@@ -78,22 +79,87 @@ export default function CartPage() {
                 </div>
             </div>
             <div className="shadow overflown-hidden rounded-lg mt-4 w-[300px]">
-                <div className="flex">
+                <div className="flex border-b border-slate-300 ml-4 mr-4">
                     <Image
-                        className="m-2"
+                        className="m-2 ml-0"
                         src={recieptPNG}
                         height={30}
                         alt={`Image `}
                     ></Image>
-                    <h1 className="font-bold mt-2">Order Summary</h1>
+                    <h1 className="font-bold mt-2 text-gray-800">
+                        Order Summary
+                    </h1>
                 </div>
-                <button
-                    className={`bg-red-700 text-white rounded text-[10px] min-h-[30px] p-1 font-bold w-full h-full `}
-                    onClick={attemptStripePayment}
-                >
-                    {' '}
-                    Place your order
-                </button>
+                <div className="ml-4 mr-4 mt-2 flex justify-between">
+                    <h2 className="text-gray-700 text-xs">
+                        Subtotal {cartProducts.length} item(s)
+                    </h2>
+                    <h2 className="text-gray-700 text-xs">
+                        $
+                        {cartProducts
+                            ?.reduce(
+                                (accumulator, product) =>
+                                    accumulator + product.price,
+                                0
+                            )
+                            .toFixed(2)}
+                    </h2>
+                </div>
+                <div className="border-b border-slate-300 ml-4 mr-4">
+                    <div className="mt-2 flex justify-between">
+                        <h2 className="text-gray-700 text-xs">Delivery</h2>
+                        <h2 className="text-gray-700 text-xs text-red-600">
+                            Free
+                        </h2>
+                    </div>
+                    <div className="mt-2 flex justify-between mb-2">
+                        <h2 className="text-gray-700 text-xs">Regional Fees</h2>
+                        <h2 className="text-gray-700 text-xs ">$1.00</h2>
+                    </div>
+                    <div className="mt-2 flex justify-between mb-2">
+                        <h2 className="text-gray-700 text-xs">
+                            Estimated Taxes
+                        </h2>
+                        <h2 className="text-gray-700 text-xs ">
+                            $
+                            {
+                                //@ts-ignore
+                                cartProducts
+                                    ?.reduce(
+                                        (accumulator, product) =>
+                                            accumulator + product.price,
+                                        0
+                                    )
+                                    .toFixed(2) * 0.0625
+                            }
+                        </h2>
+                    </div>
+                </div>
+                <div className="border-b border-slate-300  flex justify-between m-4">
+                    <h2 className="font-bold mb-4 text-gray-800">Total</h2>
+                    <h2 className="font-bold text-gray-800">
+                        $
+                        {cartProducts
+                            ?.reduce(
+                                (accumulator, product) =>
+                                    accumulator + product.price,
+                                0
+                            )
+                            .toFixed(2)}
+                    </h2>
+                </div>
+                <div className="m-4">
+                    <button
+                        className={`bg-red-700 text-white rounded text-[10px] min-h-[30px] p-1 font-bold w-full h-full`}
+                        onClick={attemptStripePayment}
+                    >
+                        Place your order
+                    </button>
+                </div>
+                <p className="text-gray-500 text-center m-2 ml-6 mr-6   text-[10px]">
+                    Order confirmation and updates will be emailed to{' '}
+                    {user?.emailAddresses[0].emailAddress}
+                </p>
             </div>
         </div>
     );
