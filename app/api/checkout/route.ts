@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
         }),
         mode: 'payment',
         success_url: 'https://temp-omega-eight.vercel.app/',
-        cancel_url: 'https://temp-omega-eight.vercel.app/checkout',
+        cancel_url: 'https://temp-omega-eight.vercel.app/cart',
     });
     return NextResponse.json({ url: session.url });
 }

@@ -46,7 +46,7 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
                     />
                 </div>
             </Link>
-            <div className="m-4 place-self-end">
+            <div className="m-4 min-w-[85%] place-self-end">
                 <Link href={`/product/${product.id}`}>
                     <h3 className="max-w-[200px] text-xs text-wrap bg-white break-words font-bold ">
                         {product.title}
@@ -73,6 +73,9 @@ const CollectionGrid = async ({ params }: PageProps): Promise<JSX.Element> => {
 
     return (
         <div className="mx-auto max-w-[1000px]">
+            <h1 className="font-bold ml-2 mb-2 mt-2 text-gray-800">
+                {collection.products.length} results
+            </h1>
             <div className="mx-auto grid gap-[1px] bg-gray-200 sm:grid-cols-3 md:grid-cols-4 grid-cols-3">
                 {collection.products.map(ProductCard)}
             </div>
