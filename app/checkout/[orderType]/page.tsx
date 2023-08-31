@@ -38,13 +38,24 @@ export default function CartPage({ params }: PageProps) {
     const filteredByOrderProducts =
         //@ts-ignore
         cartProducts.filter((prod) => prod.orderType === orderType);
+    const totalQuantity = cartProducts.reduce(
+        (accumulator, product) => accumulator + product.quantity,
+        0
+    );
     //@ts-ignore
     const filterProductsTotal = filteredByOrderProducts
-        .reduce((accumulator, product) => accumulator + product.price, 0)
+        .reduce(
+            (accumulator, product) =>
+                accumulator + product.price * product.quantity,
+            0
+        )
         .toFixed(2);
-    //@ts-ignore
-    const taxAmount = filterProductsTotal * 0.0625;
 
+    //@ts-ignore
+    const taxAmount = (filterProductsTotal * 0.0625).toFixed(2);
+    const totalAmount = (
+        Number(filterProductsTotal) + Number(taxAmount)
+    ).toFixed(2);
     return (
         <div className="m-4  justify-center flex gap-2">
             <div className="w-[425px]">
@@ -103,7 +114,7 @@ export default function CartPage({ params }: PageProps) {
                 </div>
                 <div className="ml-4 mr-4 mt-2 flex justify-between">
                     <h2 className="text-gray-700 text-xs">
-                        Subtotal {cartProducts.length} item(s)
+                        Subtotal {totalQuantity} item(s)
                     </h2>
                     <h2 className="text-gray-700 text-xs">
                         ${filterProductsTotal}
@@ -124,16 +135,12 @@ export default function CartPage({ params }: PageProps) {
                         <h2 className="text-gray-700 text-xs">
                             Estimated Taxes
                         </h2>
-                        <h2 className="text-gray-700 text-xs ">
-                            ${taxAmount.toFixed(2)}
-                        </h2>
+                        <h2 className="text-gray-700 text-xs ">${taxAmount}</h2>
                     </div>
                 </div>
                 <div className="border-b border-slate-300  flex justify-between m-4">
                     <h2 className="font-bold mb-4 text-gray-800">Total</h2>
-                    <h2 className="font-bold text-gray-800">
-                        ${filterProductsTotal}
-                    </h2>
+                    <h2 className="font-bold text-gray-800">${totalAmount}</h2>
                 </div>
                 <div className="m-4">
                     <button
