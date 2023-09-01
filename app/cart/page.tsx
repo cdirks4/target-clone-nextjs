@@ -18,7 +18,7 @@ export default function CartPage() {
     const shippingProducts = filterProductsByOrderType(OrderType.SHIPPING);
 
     return (
-        <div className="m-4">
+        <div className="m-4 grid justify-center">
             <h1 className="font-bold text-2xl">Cart</h1>
             <h2 className="font-bold text-gray-500">
                 $
