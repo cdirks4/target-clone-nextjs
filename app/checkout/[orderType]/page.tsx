@@ -28,7 +28,7 @@ export default function CartPage({ params }: PageProps) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    cartProducts: cartProducts,
+                    cartProducts: filteredByOrderProducts,
                 }),
             });
             const { url } = await response.json();
@@ -50,7 +50,6 @@ export default function CartPage({ params }: PageProps) {
             0
         )
         .toFixed(2);
-
     //@ts-ignore
     const taxAmount = (filterProductsTotal * 0.0625).toFixed(2);
     const totalAmount = (
